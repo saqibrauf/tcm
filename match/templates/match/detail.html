@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}{{ match.opponents }} - Today Cricket Matches{% endblock %}
+
+{% block 'hero' %}{% endblock %}
+
+{% block 'content' %}
+
+	<div class="tags has-addons is-marginless">
+		<span class="tag is-medium is-black is-radiusless is-marginless">{{ match.series.title }}</span>
+		<span class="tag is-medium is-radiusless is-primary is-marginless">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</span>
+	</div>
+	<h1 class="is-uppercase is-size-2">{{ match.opponents }}</h1>
+
+	<div class="field is-grouped">
+		<div class="control">
+			<div class="tags has-addons is-marginless">
+				<span class="tag is-radiusless is-dark">Status</span>
+				<span class="tag is-radiusless is-light">{{ match.status }}</span>
+			</div>
+		</div>
+		<div class="control">
+			<div class="tags has-addons is-marginless">
+				<span class="tag is-radiusless is-dark">Result</span>
+				<span class="tag is-radiusless is-light">{{ match.winner }}</span>
+			</div>
+		</div>
+	</div>
+	<h2 class="is-uppercase is-size-4">Prediction: <span class="has-text-primary is-size-3">{{ match.prediction }}</span></h2>
+	<hr>
+	<h2 class="is-uppercase is-size-4">Live Feed</h2>
+
+	{% if messages %}
+
+		{% for message in messages %}
+
+			<p class="tag is-primary is-radiusless is-size-7 is-marginless">{{ message.date|date:"d/m/Y" }} - {{ message.date|date:"h:i A" }}</p>
+			<p class="notification">{{message.message}}</p>
+			<hr>
+
+		{% endfor %}
+
+	{% else %}
+		<p>No message yet</p>
+	{% endif %}
+
+{% endblock %}

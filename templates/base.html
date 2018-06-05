@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block 'title' %}Today Cricket Matches{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700|Anaheim:400" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
+
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+	<header>{% include 'navbar.html' %}</header>
+
+    {% block 'hero' %}{% endblock %}
+
+	<div class="container is-fluid is-marginless content">
+        <div class="columns is-desktop is-paddingless is-marginless">
+            <main class="column is-8-desktop is-paddingless">
+                <div class="section content">
+                    {% block 'content' %}{% endblock %}                      
+                </div>
+            </main>
+            <aside class="column is-4-desktop is-paddingless sidebar">
+                <div class="section content">
+                    {% block 'sidebar' %}{% endblock %}
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="hero is-black">
+        <div class="hero-body">
+        </div>
+    </footer>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
