@@ -26,7 +26,8 @@ class Series(models.Model):
 #Matches in Tournament
 class Match(models.Model):	
 	series = models.ForeignKey(Series, on_delete=models.CASCADE)
-	date = models.DateTimeField(default=datetime.now)
+	date = models.DateField(default=datetime.now)
+	time = models.TimeField(default=datetime.now)
 	opponents = models.CharField(max_length=255, default='Opponents')
 	slug = models.SlugField(max_length=255, default='', editable=False)
 	ST_CHOICE = (
