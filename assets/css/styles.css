@@ -19,6 +19,10 @@ html {
 	word-break: break-word;
 }
 
+hr {
+	background-color: #b5b5b5;
+}
+
 .icon.is-large {
 	height: 4rem;
 	width: 4rem;
@@ -43,19 +47,19 @@ html {
 @media screen and (min-width: 1088px) {
 
 	html {
-		font-size: 16px;
+		font-size: 18px;
 	}
 
 	.nav-margin {
 		margin: 0 2rem !important;
 	}
 
-	main .section, aside .section {
-		padding: 3rem 2rem;
+	main .section {
+		padding: 3rem;
 	}
 
-	aside {
-		order: -1;
+	aside .section {
+		padding: 3rem 2rem;
 	}
 
 }

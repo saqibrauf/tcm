@@ -22,11 +22,14 @@
 <body>
 	<header>{% include 'navbar.html' %}</header>
 
-    {% block 'hero' %}{% endblock %}
-
 	<div class="container is-fluid is-marginless content">
-        <div class="columns is-desktop is-paddingless is-marginless">
+        <div class="columns is-desktop is-paddingless is-marginless">            
             <main class="column is-8-desktop is-paddingless">
+                {% block 'header' %}
+                    <figure class="image is-16by9 is-marginless">
+                        <img src="{% static 'images/tcm-header.jpeg' %}">
+                    </figure>
+                {% endblock %}
                 <div class="section content">
                     {% block 'content' %}{% endblock %}                      
                 </div>

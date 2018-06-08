@@ -4,46 +4,12 @@
 
 {% block 'title' %}Today Cricket Matches{% endblock %}
 
-<!--Hero Banner-->
-{% block 'hero' %}
-<div id="banner" class="hero is-black">
-	<div class="hero-body is-paddingless">
-		<div class="container is-fluid is-marginless">
-			<div class="columns is-desktop is-paddingless is-marginless">
-				<div class="column is-4-desktop is-paddingless">
-					<div class="content">
-						<p class="box is-radiusless is-size-4 is-uppercase has-text-centered-touch" style="background-color: whitesmoke;">Get <span class="has-text-primary">latest news</span>, <span class="has-text-primary">updates</span>, <span class="has-text-primary">results</span>, <span class="has-text-primary">predictions</span> and all the other information about your <span class="has-text-primary">beloved game of cricket</span>.</p>
-						{% if series %}
-							<div class="box content has-text-grey-light" style="background-color: transparent;">
-								<h2 class="is-capitalized is-size-3 has-text-primary">{{ series.title }}</h2>
-								<div class="content is-medium">{{ series.summary|truncatechars:100|safe }}</div>
-								<a class="button is-light is-outlined is-radiusless" href="#">GET ALL INFO</a>
-							</div>
-						{% endif %}
-					</div>					
-				</div>	
-				<div class="column is-8-desktop is-paddingless" style="position: relative;">
-					<figure class="image is-16by9">
-						{% if series %}
-							<img src="{{ series.series_image.url }}">
-						{% else %}
-							<img src="{% static 'images/12-BW.jpg' %}">
-						{% endif %}
-					</figure>
-				</div>			
-			</div>
-		</div>
-	</div>
-</div>
-{% endblock 'hero' %}
-
-
-
 {% block 'content' %}
 
-<h1 class="is-uppercase">Todays Cricket Matches</h1>
+<h1 class="title is-uppercase">Today Cricket Matches</h1>
 <p>GET LATEST NEWS, UPDATES, RESULTS, PREDICTIONS AND ALL THE OTHER INFORMATION ABOUT YOUR BELOVED GAME OF CRICKET.</p>
 <hr>
+
 {% for match in todays_matches %}
 	<div class="box">
 		<div class="columns is-mobile">
@@ -111,7 +77,7 @@
 
 {% endblock 'content' %}
 
-{% block 'sidebar' %}
+{% block 'sidebar' %}	
 
 	{% if all_series %}
 		<h2 class="is-size-3 is-uppercase">Current Series</h2>
@@ -130,7 +96,7 @@
 				</div>
 		    </div>
 		</div>
-		<hr>
 		{% endfor %}
 	{% endif %}
-{% endblock %}
+
+{% endblock 'sidebar' %}
