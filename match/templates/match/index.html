@@ -8,7 +8,6 @@
 
 <h1 class="title is-uppercase">Today Cricket Matches</h1>
 <p>GET LATEST NEWS, UPDATES, RESULTS, PREDICTIONS AND ALL THE OTHER INFORMATION ABOUT YOUR BELOVED GAME OF CRICKET.</p>
-<hr>
 
 {% for match in todays_matches %}
 	<div class="box">
@@ -29,7 +28,9 @@
 		</div>			
 	</div>
 	{% empty %}
-	<p>There is no match today.</p>
+	<div class="notification is-light">
+		<p class="is-size-3 is-uppercase">No match is scheduled today.</p>
+	</div>
 {% endfor %}
 
 
