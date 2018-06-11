@@ -27,15 +27,6 @@ hr {
 	margin-bottom: 2rem;
 }
 
-.icon.is-large {
-	height: 4rem;
-	width: 4rem;
-}
-
-.fa-3x {
-	font-size: 4rem;
-}
-
 .sidebar {
 	background-color: whitesmoke;
 }
@@ -45,6 +36,10 @@ hr {
 	background-position: center top;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+.notification a:not(.button) {
+	text-decoration: none;
 }
 
 
