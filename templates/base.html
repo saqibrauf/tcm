@@ -9,7 +9,7 @@
     <title>{% block 'title' %}Today Cricket Matches{% endblock %}</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Oswald:700|Cuprum:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton:400|Maven+Pro:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <!-- Favicon -->
@@ -25,11 +25,7 @@
 	<div class="container is-fluid is-marginless content">
         <div class="columns is-desktop is-paddingless is-marginless">            
             <main class="column is-8-desktop is-paddingless">
-                {% block 'header' %}
-                    <figure class="image is-16by9 is-marginless">
-                        <img src="{% static 'images/tcm-header.jpeg' %}">
-                    </figure>
-                {% endblock %}
+                {% block 'fullwidth' %}{% endblock %}
                 <div class="section content">
                     {% block 'content' %}{% endblock %}                      
                 </div>

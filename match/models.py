@@ -1,9 +1,10 @@
 from django.db import models
 from datetime import datetime
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 
-#Main tournament table
+#Main series table
 class Series(models.Model):
 	date = models.DateField(default=datetime.today)
 	title = models.CharField(max_length=255, default='Enter Tournament Title')
@@ -53,7 +54,6 @@ class Match(models.Model):
 		super().save(*args, **kwargs)
 
 	def get_absolute_url(self):
-		from django.urls import reverse
 		return reverse('match_detail', args=[str(self.slug)])
 	
 	class Meta:

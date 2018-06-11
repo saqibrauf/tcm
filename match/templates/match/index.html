@@ -4,75 +4,67 @@
 
 {% block 'title' %}Today Cricket Matches{% endblock %}
 
+{% block 'fullwidth' %}
+
+<div class="hero is-success">
+	<div class="hero-body">
+		<h1 class="title is-uppercase">Today Cricket Matches</h1>
+		<p class="subtitle is-size-5">GET LATEST NEWS, UPDATES, RESULTS, PREDICTIONS AND ALL THE OTHER INFORMATION ABOUT YOUR BELOVED GAME OF CRICKET.</p>
+		<p class="is-size-6">We cover all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major domestic cricket leagues around the world. Some of the famouse leagues are <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Natwest T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong> and <strong>Tamil Nadu Premier League</strong>.</p>
+	</div>
+</div>
+
+{% endblock 'fullwidth' %}
+
 {% block 'content' %}
 
-<h1 class="title is-uppercase">Today Cricket Matches</h1>
-<p>GET LATEST NEWS, UPDATES, RESULTS, PREDICTIONS AND ALL THE OTHER INFORMATION ABOUT YOUR BELOVED GAME OF CRICKET.</p>
-
+<h2 class="has-text-success">List of Today's Matches</h2>
+<p>Here's a list of all matches being played today.</p>
 {% for match in todays_matches %}
-	<div class="box">
-		<div class="columns is-mobile">
-			<div class="column is-narrow">
-				<span class="icon is-large has-text-primary">
-				  	<i class="fas fa-3x fa-caret-square-right"></i>
-				</span>
-			</div>
-			<div class="column">
-				<h3 class="is-uppercase has-text-black">{{ match.opponents }}</h3>
-				<div class="tags">
-					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</div>
-				<a class="button is-radiusless is-uppercase is-dark is-outlined" href="{% url 'match_detail' match.slug %}">View Match Detail</a>
-			</div>
-		</div>			
+	<div class="box is-radiusless">
+		<div class="tags is-marginless">
+			<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
+			<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
+		</div>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized is-marginless">{{ match.opponents }}</h3></a>		
 	</div>
 	{% empty %}
-	<div class="notification is-light">
+	<div class="notification">
 		<p class="is-size-3 is-uppercase">No match is scheduled today.</p>
 	</div>
 {% endfor %}
+<hr>
 
-
-{% for match in upcoming_matches %}
-	<div class="box">
-		<div class="columns is-mobile">
-			<div class="column is-narrow">
-				<span class="icon is-large has-text-info">
-				  	<i class="fas fa-3x fa-calendar-plus"></i>
-				</span>
-			</div>
-			<div class="column">
-				<h3 class="is-uppercase has-text-black">{{ match.opponents }}</h3>
-				<div class="tags">
-					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</div>
-				<a class="button is-radiusless is-uppercase is-dark is-outlined" href="{% url 'match_detail' match.slug %}">View Match Detail</a>
-			</div>
-		</div>			
+<h2 class="has-text-success">List of Upcoming Cricket Matches</h2>
+<p>Here's a list of upcoming matches coming in next few days.</p>
+{% for match in upcoming_matches %}	
+	<div class="box is-radiusless">
+		<div class="tags is-marginless">
+			<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
+			<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
+		</div>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized is-marginless">{{ match.opponents }}</h3></a>		
 	</div>
 	{% empty %}
-	<p>No upcoming matches</p>
+	<div class="notification">
+		<p class="is-size-3 is-uppercase">No match is scheduled today.</p>
+	</div>
 {% endfor %}
+<hr>
 
+<h2 class="has-text-success">List of Recent Cricket Matches</h2>
+<p>Here's a list of recent matches played in past few days.</p>
 {% for match in recent_matches %}
-	<div class="box">
-		<div class="columns is-mobile">
-			<div class="column is-narrow">
-				<span class="icon is-large has-text-light">
-				  	<i class="fas fa-3x fa-calendar-minus"></i>
-				</span>
-			</div>
-			<div class="column">
-				<h3 class="is-uppercase has-text-black">{{ match.opponents }}</h3>
-				<div class="tags">
-					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</div>
-				<a class="button is-radiusless is-uppercase is-dark is-outlined" href="{% url 'match_detail' match.slug %}">View Match Detail</a>
-			</div>
-		</div>			
+	<div class="box is-radiusless">
+		<div class="tags is-marginless">
+			<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
+			<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
+		</div>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized is-marginless">{{ match.opponents }}</h3></a>		
+	</div>
+	{% empty %}
+	<div class="notification">
+		<p class="is-size-3 is-uppercase">No match is scheduled today.</p>
 	</div>
 {% endfor %}
 
@@ -81,7 +73,7 @@
 {% block 'sidebar' %}	
 
 	{% if all_series %}
-		<h2 class="is-size-3 is-uppercase">Current Series</h2>
+		<h2 class="is-uppercase has-text-success">Current Series</h2>
 		{% for series in all_series %}
 		<div class="card">
 			<div class="card-image" >
@@ -90,7 +82,7 @@
 				</figure>
 			</div>
 			<div class="card-content">
-		    	<h3 class="is-size-5 is-uppercase">{{ series.title }}</h3>
+		    	<h3 class="is-size-5 is-capitalized">{{ series.title }}</h3>
 				<p class="tag is-dark is-uppercase">Start Date - {{ series.date|date:"d/m/Y" }}</p>
 				<div class="content">
 					{{ series.summary|safe|truncatechars:250 }}
