@@ -18,70 +18,62 @@
 	<p class="subtitle is-size-5">GET LATEST NEWS, UPDATES, RESULTS, PREDICTIONS AND ALL THE OTHER INFORMATION ABOUT YOUR BELOVED GAME OF CRICKET.</p>
 	<p class="is-size-6">We cover all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major domestic cricket leagues around the world. Some of the famous leagues are <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Natwest T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong> and <strong>Tamil Nadu Premier League</strong>.</p>
 </div>
-<hr>
 
-<div class="notification is-success is-radiusless is-marginless">
+<div class="notification is-success is-radiusless">
 	<h2 class="title is-uppercase">List of Today's Matches</h2>
 	<p class="subtitle is-uppercase">Here's a list of all matches being played today.</p>
 </div>
-<div class="notification is-radiusless">
-	{% for match in todays_matches %}
-		<div class="box is-radiusless is-shadowless">
-			<div class="tags is-marginless">
-				<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-				<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-			</div>
-			<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized is-marginless">{{ match.opponents }}</h3></a>		
-		</div>
-		{% empty %}
-		<div class="notification">
-			<p class="is-size-3 is-uppercase">No match is scheduled today.</p>
-		</div>
-	{% endfor %}
-</div>
 
-<hr>
+{% for match in todays_matches %}
+	<div class="content">
+		<div class="tags is-marginless">
+			<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
+			<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
+		</div>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized">{{ match.opponents }}</h3></a>
+	</div>	
+	{% empty %}
+	<div class="content is-medium">
+		<p class="is-uppercase">No match is scheduled today.</p>
+	</div>
+{% endfor %}
 
-<div class="notification is-success is-radiusless is-marginless">
+<div class="notification is-success is-radiusless">
 	<h2 class="title is-uppercase">List of Upcoming Cricket Matches</h2>
 	<p class="subtitle is-uppercase">Here's a list of upcoming matches coming in next few days.</p>
 </div>
-<div class="notification is-radiusless">
-	{% for match in upcoming_matches %}
-		<div class="box is-radiusless is-shadowless">
-			<div class="tags is-marginless">
-				<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-				<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-			</div>
-			<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized is-marginless">{{ match.opponents }}</h3></a>		
+{% for match in upcoming_matches %}
+	<div class="content">
+		<div class="tags is-marginless">
+			<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
+			<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
 		</div>
-		{% empty %}
-		<div class="notification">
-			<p class="is-size-3 is-uppercase">No match is scheduled today.</p>
-		</div>
-	{% endfor %}
-</div>
-<hr>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized">{{ match.opponents }}</h3></a>
+	</div>
+	{% empty %}
+	<div class="content is-medium">
+		<p class="is-uppercase">No match is scheduled today.</p>
+	</div>
+{% endfor %}
 
-<div class="notification is-success is-radiusless is-marginless">
+
+<div class="notification is-success is-radiusless">
 	<h2 class="title is-uppercase">List of Recent Cricket Matches</h2>
 	<p class="subtitle is-uppercase">Here's a list of recent matches played in past few days.</p>
 </div>
-<div class="notification is-radiusless">
-	{% for match in recent_matches %}
-		<div class="box is-radiusless is-shadowless">
-			<div class="tags is-marginless">
-				<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-				<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-			</div>
-			<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized is-marginless">{{ match.opponents }}</h3></a>		
+{% for match in recent_matches %}
+	<div class="content">
+		<div class="tags is-marginless">
+			<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
+			<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
 		</div>
-		{% empty %}
-		<div class="notification">
-			<p class="is-size-3 is-uppercase">No match is scheduled today.</p>
-		</div>
-	{% endfor %}
-</div>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-capitalized">{{ match.opponents }}</h3></a>
+	</div>
+	{% empty %}
+	<div class="content is-medium">
+		<p class="is-uppercase">No match is scheduled today.</p>
+	</div>
+{% endfor %}
 
 {% endblock 'content' %}
 
