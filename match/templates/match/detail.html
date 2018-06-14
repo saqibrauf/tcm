@@ -7,42 +7,43 @@
 
 {% block 'content' %}
 
-	<div class="tags has-addons is-marginless">
-		<span class="tag is-medium is-black is-radiusless is-marginless">{{ match.series.title }}</span>
-		<span class="tag is-medium is-radiusless is-primary is-marginless">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
+	<div class="tags">
+		<span class="tag is-light is-radiusless is-uppercase">{{ match.series.title }}</span>
+		<span class="tag is-radiusless is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
 	</div>
-	<h1 class="is-uppercase is-size-2">{{ match.opponents }}</h1>
-
+	<h1 class="title is-uppercase is-size-3">{{ match.opponents }}</h1>
 	<div class="field is-grouped">
 		<div class="control">
-			<div class="tags has-addons is-marginless">
+			<div class="tags has-addons">
 				<span class="tag is-radiusless is-dark">Status</span>
 				<span class="tag is-radiusless is-light">{{ match.status }}</span>
 			</div>
 		</div>
-		<div class="control">
-			<div class="tags has-addons is-marginless">
-				<span class="tag is-radiusless is-dark">Result</span>
-				<span class="tag is-radiusless is-light">{{ match.winner }}</span>
-			</div>
-		</div>
 	</div>
-	<h2 class="is-uppercase is-size-4">Prediction: <span class="has-text-primary is-size-3">{{ match.prediction }}</span></h2>
+
+	<h2 class="is-uppercase is-size-5">Prediction: <span class="has-text-primary">{{ match.prediction }}</span></h2>
+	<h2 class="is-uppercase is-size-5">Winner: <span class="has-text-primary">{{ match.winner }}</span></h2>
 	<hr>
-	<h2 class="is-uppercase is-size-4">Live Feed</h2>
 
-	{% if messages %}
+	<h2 class="is-uppercase is-size-5"><span class="icon has-text-primary"><i class="far fa-comment"></i></span> Live Feed</h2>
+	<p>Occasionally, we will give you live comments regarding to current match.</p>	
 
-		{% for message in messages %}
+	{% for message in messages %}
+		
+		<div class="notification">
+			<p class="tag is-dark is-radiusless is-size-7">{{ message.date|date:"d/m/Y" }} - {{ message.date|date:"h:i A" }}</p>
+			<p>{{message.message}}</p>
+		</div>
+		{% empty %}
+		<div class="notification">				
+			<p>There is no message for this match.</p>
+		</div>
+	{% endfor %}
 
-			<p class="tag is-primary is-radiusless is-size-7 is-marginless">{{ message.date|date:"d/m/Y" }} - {{ message.date|date:"h:i A" }}</p>
-			<p class="notification">{{message.message}}</p>
-			<hr>
+{% endblock 'content' %}
 
-		{% endfor %}
+{% block 'sidebar' %}
 
-	{% else %}
-		<p>No message yet</p>
-	{% endif %}
+<h3>{{ match.series.title }}</h3>
 
 {% endblock %}

@@ -13,6 +13,7 @@
 {% endblock 'fullwidth' %}
 
 {% block 'content' %}
+
 <div class="content">
 	<h1 class="title is-uppercase">Today Cricket Matches</h1>
 	<p class="subtitle is-size-5">GET LATEST NEWS, UPDATES, RESULTS, PREDICTIONS AND ALL THE OTHER INFORMATION ABOUT YOUR BELOVED GAME OF CRICKET.</p>
@@ -20,23 +21,32 @@
 </div>
 
 <hr>
+
+<!--TODAYS MATCHES-->
+
 <h2 class="title is-4 is-uppercase">List of Today's Matches</h2>
 <p class="subtitle is-6 is-uppercase">Here's a list of all matches being played today.</p>
 <hr>
 <div class="columns is-mobile">
-	<div class="column is-narrow">
-		<p class="icon is-large has-text-primary">
+	<div class="column is-narrow is-hidden-mobile">
+		<p class="icon is-large">
 			<i class="far fa-3x fa-play-circle"></i>
 		</p>
 	</div>
 	<div class="column">
 		{% for match in todays_matches %}	
 			<div class="content">
-				<div class="tags is-marginless">
+				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
+				<p class="subtitle is-7">
 					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
 					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</div>
-				<a href="{% url 'match_detail' match.slug %}"><h3 class="is-size-5 is-capitalized">{{ match.opponents }}</h3></a>
+				</p>				
+				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+					<span class="icon">
+						<i class="far fa-play-circle"></i>
+					</span>
+					<span>View Prediction</span>
+				</a>
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
@@ -53,19 +63,25 @@
 <hr>
 
 <div class="columns is-mobile">
-	<div class="column is-narrow">
-		<p class="icon is-large has-text-primary">
+	<div class="column is-narrow is-hidden-mobile">
+		<p class="icon is-large">
 			<i class="far fa-3x fa-calendar-alt"></i>
 		</p>
 	</div>
 	<div class="column">
 		{% for match in upcoming_matches %}	
 			<div class="content">
-				<div class="tags is-marginless">
+				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
+				<p class="subtitle is-7">
 					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
 					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</div>
-				<a href="{% url 'match_detail' match.slug %}"><h3 class="is-size-5 is-capitalized">{{ match.opponents }}</h3></a>
+				</p>				
+				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+					<span class="icon">
+						<i class="far fa-play-circle"></i>
+					</span>
+					<span>View Prediction</span>
+				</a>
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
@@ -81,19 +97,25 @@
 <hr>
 
 <div class="columns is-mobile">
-	<div class="column is-narrow">
-		<p class="icon is-large has-text-primary">
+	<div class="column is-narrow is-hidden-mobile">
+		<p class="icon is-large">
 			<i class="far fa-3x fa-calendar-check"></i>
 		</p>
 	</div>
 	<div class="column">
 		{% for match in recent_matches %}	
 			<div class="content">
-				<div class="tags is-marginless">
+				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
+				<p class="subtitle is-7">
 					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
 					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</div>
-				<a href="{% url 'match_detail' match.slug %}"><h3 class="is-size-5 is-capitalized">{{ match.opponents }}</h3></a>
+				</p>				
+				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+					<span class="icon">
+						<i class="far fa-play-circle"></i>
+					</span>
+					<span>View Prediction</span>
+				</a>
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
