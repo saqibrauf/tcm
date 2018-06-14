@@ -37,10 +37,7 @@
 		{% for match in todays_matches %}	
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
-				<p class="subtitle is-7">
-					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</p>				
+				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>				
 				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -50,7 +47,7 @@
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
-				<p class="is-uppercase">No match is scheduled today.</p>
+				<p class="is-uppercase has-text-danger">No match is scheduled today.</p>
 			</div>
 		{% endfor %}
 	</div>
@@ -72,10 +69,7 @@
 		{% for match in upcoming_matches %}	
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
-				<p class="subtitle is-7">
-					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</p>				
+				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>					
 				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -85,7 +79,7 @@
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
-				<p class="is-uppercase">Currently, we have no upcoming matches in the list.</p>
+				<p class="is-uppercase has-text-danger">Currently, we have no upcoming matches in the list.</p>
 			</div>
 		{% endfor %}
 	</div>
@@ -106,10 +100,7 @@
 		{% for match in recent_matches %}	
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
-				<p class="subtitle is-7">
-					<span class="tag is-light is-uppercase">{{ match.series.title }}</span>
-					<span class="tag is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-				</p>				
+				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>					
 				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -119,7 +110,7 @@
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
-				<p class="is-uppercase">Currently, we have no recent matches in the list.</p>
+				<p class="is-uppercase has-text-danger">Currently, we have no recent matches in the list.</p>
 			</div>
 		{% endfor %}
 	</div>

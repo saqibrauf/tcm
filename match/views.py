@@ -13,10 +13,12 @@ def index(request):
 	return render(request, 'match/index.html', context={'todays_matches':todays_matches, 'upcoming_matches':upcoming_matches, 'recent_matches':recent_matches, 'all_series':all_series})
 
 
-def match_detail(request, slug):
+def match_detail(request, slug, s_slug=''):
 	try:
 		match = Match.objects.get(slug=slug)
+		series = Series.objects.get(pk=match.series.id)
+		schedule = series.match_set.all().order_by('date')
 		messages = match.message_set.all()
-		return render(request, 'match/detail.html', context={'match':match, 'messages':messages})
+		return render(request, 'match/detail.html', context={'series':series, 'schedule':schedule, 'match':match, 'messages':messages})
 	except Match.DoesNotExist:
 		return render(request, 'match/404.html')

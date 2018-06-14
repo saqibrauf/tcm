@@ -6,12 +6,9 @@
 {% block 'hero' %}{% endblock %}
 
 {% block 'content' %}
-
-	<div class="tags">
-		<span class="tag is-light is-radiusless is-uppercase">{{ match.series.title }}</span>
-		<span class="tag is-radiusless is-light is-uppercase">{{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</span>
-	</div>
+	
 	<h1 class="title is-uppercase is-size-3">{{ match.opponents }}</h1>
+	<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>	
 	<div class="field is-grouped">
 		<div class="control">
 			<div class="tags has-addons">
@@ -44,6 +41,18 @@
 
 {% block 'sidebar' %}
 
-<h3>{{ match.series.title }}</h3>
+<h3>{{ series.title }}</h3>
+<figure class="image is-16by9 is-marginless">
+	<img src="{{ series.series_image.url }}">
+</figure>
+<hr>
+<h4 class="is-uppercase">Complete Schedule</h4>
+{% for schedule in schedule  %}
+
+	<ul>
+		<li><p class="title is-6 is-uppercase"><strong><a class="has-text-primary" href="{% url 'match_detail' schedule.slug %}">{{ schedule.opponents }}</a></strong></p><p class="subtitle is-7">{{ schedule.date }}</p></li>
+	</ul>
+
+{% endfor %}
 
 {% endblock %}
