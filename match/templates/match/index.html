@@ -6,8 +6,8 @@
 
 {% block 'fullwidth' %}
 
-<figure class="image is-16by9 is-marginless">
-	<img src="{% static 'images/16by9.png' %}">
+<figure class="image is-16by9 is-marginless" style="position: relative;">
+	<img src="{% static 'images/16by9.png' %}" alt="Today Cricket Matches">
 </figure>
 
 {% endblock 'fullwidth' %}
@@ -53,6 +53,7 @@
 	</div>
 </div>
 
+<!--TESTING-->
 
 <hr>
 	<h2 class="title is-4 is-uppercase">List of Upcoming Cricket Matches</h2>
@@ -105,7 +106,7 @@
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
 					</span>
-					<span>View Prediction</span>
+					<span>View Match Details</span>
 				</a>
 			</div>	
 			{% empty %}

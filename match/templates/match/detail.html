@@ -3,7 +3,16 @@
 
 {% block 'title' %}{{ match.opponents }} - Today Cricket Matches{% endblock %}
 
-{% block 'hero' %}{% endblock %}
+{% block 'fullwidth' %}
+
+<div class="hero is-primary">
+	<div class="hero-body">
+		<h1 class="title is-uppercase is-size-3">{{ match.opponents }}</h1>
+		<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>
+	</div>
+</div>
+
+{% endblock %}
 
 {% block 'content' %}
 	
@@ -41,11 +50,11 @@
 
 {% block 'sidebar' %}
 
-<h3>{{ series.title }}</h3>
+
 <figure class="image is-16by9 is-marginless">
 	<img src="{{ series.series_image.url }}">
 </figure>
-<hr>
+<h3 class="is-uppercase">{{ series.title }}</h3>
 <h4 class="is-uppercase">Complete Schedule</h4>
 {% for schedule in schedule  %}
 
