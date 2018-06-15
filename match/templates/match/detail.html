@@ -15,17 +15,6 @@
 {% endblock %}
 
 {% block 'content' %}
-	
-	<h1 class="title is-uppercase is-size-3">{{ match.opponents }}</h1>
-	<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>	
-	<div class="field is-grouped">
-		<div class="control">
-			<div class="tags has-addons">
-				<span class="tag is-radiusless is-dark">Status</span>
-				<span class="tag is-radiusless is-light">{{ match.status }}</span>
-			</div>
-		</div>
-	</div>
 
 	<h2 class="is-uppercase is-size-5">Prediction: <span class="has-text-primary">{{ match.prediction }}</span></h2>
 	<h2 class="is-uppercase is-size-5">Winner: <span class="has-text-primary">{{ match.winner }}</span></h2>
