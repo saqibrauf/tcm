@@ -19,16 +19,20 @@ html {
 	word-break: break-word;
 }
 
+hr {
+	background-color: #e8e8e8;
+}
+
 .card {
 	margin-bottom: 2rem;
 }
 
 .sidebar {
-	background-color: whitesmoke;
+	/*background-color: whitesmoke;*/
 }
 
 .banner-bg {
-	background-image: url('../images/12-BW.jpg');
+	background-image: url('../images/12.jpg');
 	background-position: center top;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -50,11 +54,11 @@ html {
 	}
 
 	main .section {
-		padding: 3rem;
+		padding: 3rem 2rem 3rem 0;
 	}
 
 	aside .section {
-		padding: 3rem 2rem;
+		padding: 3rem 0 3rem 2rem;
 	}
 
 }

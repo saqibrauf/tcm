@@ -13,7 +13,7 @@ def index(request):
 	return render(request, 'match/index.html', context={'todays_matches':todays_matches, 'upcoming_matches':upcoming_matches, 'recent_matches':recent_matches, 'all_series':all_series})
 
 
-def match_detail(request, slug, s_slug=''):
+def match_detail(request, slug):
 	try:
 		match = Match.objects.get(slug=slug)
 		series = Series.objects.get(pk=match.series.id)

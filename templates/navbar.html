@@ -1,8 +1,8 @@
 
-<nav class="navbar is-white has-shadow">
-    <div class="container is-fluid nav-margin">
+<nav class="navbar is-light">
+    <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item title is-5 is-uppercase is-marginless" href="{% url 'index' %}">Today Cricket Matches</a>
+            <a class="navbar-item is-uppercase is-hidden-desktop" href="{% url 'index' %}">Home</a>
             <div class="navbar-burger burger" data-target="navMain">
                 <span></span>
                 <span></span>
@@ -11,7 +11,6 @@
         </div>
         <div id="navMain" class="navbar-menu">
             <div class="navbar-end">
-                <a class="navbar-item is-uppercase" href="{% url 'index' %}">Home</a>
                 <a class="navbar-item is-uppercase" href="{% url 'index' %}">Series</a>
                 <a class="navbar-item is-uppercase" href="{% url 'index' %}">Today Matches</a>
                 <a class="navbar-item is-uppercase" href="{% url 'index' %}">Upcoming Matches</a>

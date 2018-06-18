@@ -4,27 +4,24 @@
 
 {% block 'title' %}Today Cricket Matches{% endblock %}
 
-{% block 'fullwidth' %}
+{% block 'content' %}
 
-<figure class="image is-16by9 is-marginless" style="position: relative;">
+<figure class="image is-16by9 is-marginless" style="margin-bottom: 1.5rem !important;">
 	<img src="{% static 'images/16by9.png' %}" alt="Today Cricket Matches">
 </figure>
 
-{% endblock 'fullwidth' %}
+<div class="content">	
+	<p class="heading is-size-6"><em>Get predictions of almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major <strong>domestic cricket leagues</strong> around the world.</em></p>
+	<p><em>Some of the famous leagues are <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Natwest T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong> and <strong>Tamil Nadu Premier League</strong>.</em></p>
 
-{% block 'content' %}
 
-<div class="content">
-	<h1 class="title is-uppercase">Today Cricket Matches</h1>
-	<p class="subtitle is-size-5">GET LATEST NEWS, UPDATES, RESULTS, PREDICTIONS AND ALL THE OTHER INFORMATION ABOUT YOUR BELOVED GAME OF CRICKET.</p>
-	<p class="is-size-6">We cover all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major domestic cricket leagues around the world. Some of the famous leagues are <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Natwest T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong> and <strong>Tamil Nadu Premier League</strong>.</p>
+	<hr>
 </div>
 
-<hr>
 
 <!--TODAYS MATCHES-->
 
-<h2 class="title is-4 is-uppercase">List of Today's Matches</h2>
+<h2 class="title is-4 is-capitalized">List of Today's Matches</h2>
 <p class="subtitle is-6 is-uppercase">Here's a list of all matches being played today.</p>
 <hr>
 <div class="columns is-mobile">
@@ -37,7 +34,10 @@
 		{% for match in todays_matches %}	
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
-				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>				
+				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>
+				{% if match.summary %}
+					<div class="notification content">{{ match.summary|safe|truncatechars:150 }}</div>		
+				{% endif %}	
 				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -47,7 +47,9 @@
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
-				<p class="is-uppercase has-text-danger">No match is scheduled today.</p>
+				<div class="notification is-danger">
+					<p class="is-uppercase">No match is scheduled today.</p>
+				</div>				
 			</div>
 		{% endfor %}
 	</div>
@@ -56,7 +58,7 @@
 <!--TESTING-->
 
 <hr>
-	<h2 class="title is-4 is-uppercase">List of Upcoming Cricket Matches</h2>
+	<h2 class="title is-4 is-capitalized">List of Upcoming Cricket Matches</h2>
 	<p class="subtitle is-6 is-uppercase">Here's a list of upcoming matches coming in next few days.</p>
 <hr>
 
@@ -70,7 +72,10 @@
 		{% for match in upcoming_matches %}	
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
-				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>					
+				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>	
+				{% if match.summary %}
+					<div class="notification content">{{ match.summary|safe|truncatechars:150 }}</div>		
+				{% endif %}					
 				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -80,14 +85,16 @@
 			</div>	
 			{% empty %}
 			<div class="content is-medium">
-				<p class="is-uppercase has-text-danger">Currently, we have no upcoming matches in the list.</p>
+				<div class="notification is-danger">
+					<p class="is-uppercase">Currently, we have no upcoming matches in the list.</p>
+				</div>
 			</div>
 		{% endfor %}
 	</div>
 </div>
 
 <hr>
-	<h2 class="title is-4 is-uppercase">List of Recent Cricket Matches</h2>
+	<h2 class="title is-4 is-capitalized">List of Recent Cricket Matches</h2>
 	<p class="subtitle is-6 is-uppercase">Here's a list of recent matches played in past few days.</p>
 <hr>
 
@@ -101,7 +108,10 @@
 		{% for match in recent_matches %}	
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
-				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>					
+				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>	
+				{% if match.summary %}
+					<div class="notification content">{{ match.summary|safe|truncatechars:150 }}</div>		
+				{% endif %}					
 				<a class="button is-small is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -119,10 +129,10 @@
 
 {% endblock 'content' %}
 
-{% block 'sidebar' %}	
+{% block 'sidebar' %}
 
 	{% if all_series %}
-		<h2 class="is-uppercase">Current Series</h2>
+		<h2 class="is-capitalized">Current Series</h2>
 		{% for series in all_series %}
 		<div class="card">
 			<div class="card-image" >
