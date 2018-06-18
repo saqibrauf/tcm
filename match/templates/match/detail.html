@@ -6,7 +6,7 @@
 
 
 {% block 'content' %}
-	<h1 class="title is-capitalized is-size-3">{{ match.opponents }}</h1>
+	<h1 class="title is-capitalized is-size-3-mobile">{{ match.opponents }}</h1>
 	<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>
 
 	<h2 class="is-uppercase is-size-5">Prediction: <span class="has-text-primary">{{ match.prediction }}</span></h2>

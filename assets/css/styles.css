@@ -28,7 +28,7 @@ hr {
 }
 
 .sidebar {
-	/*background-color: whitesmoke;*/
+	background-color: whitesmoke;
 }
 
 .banner-bg {
@@ -59,6 +59,10 @@ hr {
 
 	aside .section {
 		padding: 3rem 0 3rem 2rem;
+	}
+
+	.sidebar {
+		background-color: white;
 	}
 
 }

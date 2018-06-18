@@ -21,7 +21,6 @@
 
 <body>
 	<header>
-        {% include 'navbar.html' %}
         <div class="hero is-black">
             <div class="hero-body" style="padding: 1.5rem;">
                 <div class="container">
@@ -35,9 +34,9 @@
                         <div class="column is-6-desktop">
                             {% url 'index' as home_url %}
                             {% if request.get_full_path == home_url %}
-                                <h1 class="title is-3 is-size-4-mobile is-uppercase">Today Cricket Matches</h1>
+                                <h1 class="title is-3 is-size-5-mobile is-uppercase">Today Cricket Matches</h1>
                             {% else %}
-                                <p class="title is-3 is-size-4-mobile is-uppercase">Today Cricket Matches</p>
+                                <p class="title is-3 is-size-5-mobile is-uppercase">Today Cricket Matches</p>
                             {% endif %}                            
                             <p class="subtitle is-6 is-size-7-mobile heading"><em>Get <strong>Accurate Predictions</strong> And <strong>Betting Tips</strong> For All <strong>Upcoming</strong> And <strong>Today's Cricket Matches</strong>.</em></p>
                         </div>
@@ -45,7 +44,8 @@
                     </a>
                 </div>
             </div>
-        </div>        
+        </div>
+        {% include 'navbar.html' %}       
     </header>
     {% block 'fullwidth' %}{% endblock %}
 	<div class="container">
@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <footer class="hero is-light">
+    <footer class="hero is-dark">
         <div class="hero-body">
             <div class="container content">
                 <div class="columns is-desktop">
