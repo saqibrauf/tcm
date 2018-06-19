@@ -17,7 +17,7 @@
 
 	{% for message in messages %}
 		
-		<div class="notification">
+		<div class="content">
 			<p class="is-size-7 is-marginless"><strong>{{ message.date|date:"d/m/Y" }} - {{ message.date|date:"h:i A" }}</strong></p>
 			<div>{{message.message|safe}}</div>
 		</div>

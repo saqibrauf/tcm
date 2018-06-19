@@ -21,33 +21,11 @@
 
 <body>
 	<header>
-        <div class="hero is-black">
-            <div class="hero-body" style="padding: 1.5rem;">
-                <div class="container">
-                    <a href="{% url 'index' %}">
-                    <div class="columns is-mobile is-vcentered">
-                        <div class="column is-narrow">
-                            <figure class="image is-96x96">
-                                <img src="{% static 'images/logo.png' %}">
-                            </figure>
-                        </div>
-                        <div class="column is-6-desktop">
-                            {% url 'index' as home_url %}
-                            {% if request.get_full_path == home_url %}
-                                <h1 class="title is-3 is-size-5-mobile is-uppercase">Today Cricket Matches</h1>
-                            {% else %}
-                                <p class="title is-3 is-size-5-mobile is-uppercase">Today Cricket Matches</p>
-                            {% endif %}                            
-                            <p class="subtitle is-6 is-size-7-mobile heading"><em>Get <strong>Accurate Predictions</strong> And <strong>Betting Tips</strong> For All <strong>Upcoming</strong> And <strong>Today's Cricket Matches</strong>.</em></p>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        {% include 'navbar.html' %}       
+         {% include 'navbar.html' %}
     </header>
-    {% block 'fullwidth' %}{% endblock %}
+
+    {% block 'above_content' %}{% endblock %}
+
 	<div class="container">
         <div class="columns is-desktop is-paddingless is-marginless">            
             <main class="column is-8-desktop is-paddingless">
@@ -57,27 +35,19 @@
             </main>
             <aside class="column is-4-desktop is-paddingless sidebar">
                 <div class="section content">
-                    {% block 'sidebar' %}{% endblock %}
+                    {% block 'sidebar' %}
+                    {% endblock %}
                 </div>
             </aside>
         </div>
     </div>
 
+    {% block 'below_content' %}{% endblock %}
+
     <footer class="hero is-dark">
         <div class="hero-body">
             <div class="container content">
-                <div class="columns is-desktop">
-                    <div class="column is-7-desktop">
-                        <p class="title is-2 is-size-3-mobile is-uppercase">are you grown up and ready to use science to your benefit or still believe in miracles?</p>
-                        <p class="subtitle is-6 heading"><em>We use the power of Staistics, Mathematics and Artificial Intelligence to predict the winner of the match.</em></p>
-                    </div>
-                    <div class="column is-5-desktop">
-                        <h4 class="is-capitalized has-text-white">How it works</h4>
-                        <p class="heading is-size-7">It all starts with data collected by cricinfo's statsguru and live betting data from betfair.</p>
-                        <p class="heading is-size-7">We use cricinfo's statsguru to get stats about ground, teams and players past performances, head to head stats and many more factors to predict the outcome.</p>
-                        <p class="heading is-size-7">We use betfair to fetch betting data and use Artifical intelligence to analyze this data to get information about current betting trends from all over the world.</p>  
-                    </div>  
-                </div>
+                
             </div>      
         </div>
     </footer>

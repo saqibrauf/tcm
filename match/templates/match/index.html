@@ -6,12 +6,12 @@
 
 {% block 'content' %}
 
-<figure class="image is-16by9 is-marginless is-hidden" style="margin-bottom: 1.5rem !important;">
-	<img src="{% static 'images/16by9.png' %}" alt="Today Cricket Matches">
+<figure class="image is-16by9 is-marginless" style="margin-bottom: 1.5rem !important;">
+	<img src="{% static 'images/bg11.png' %}">
 </figure>
 
 <div class="content">
-	<h2 class="is-capitalized">Get accurate predictions and betting tips</h2>
+	<h2 class="is-capitalized">Get accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
 	<p class="heading is-size-6"><em>Get predictions of almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major <strong>domestic cricket leagues</strong> around the world.</em></p>
 	<p><em>Some of the famous leagues are <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Natwest T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong> and <strong>Tamil Nadu Premier League</strong>.</em></p>
 	<hr>
@@ -34,9 +34,6 @@
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
 				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>
-				{% if match.summary %}
-					<div class="notification content">{{ match.summary|safe|truncatechars:150 }}</div>		
-				{% endif %}	
 				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -51,8 +48,6 @@
 		{% endfor %}
 	</div>
 </div>
-
-<!--TESTING-->
 
 <hr>
 	<h2 class="title is-4 is-capitalized">List of Upcoming Cricket Matches</h2>
@@ -70,9 +65,6 @@
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
 				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>	
-				{% if match.summary %}
-					<div class="notification content">{{ match.summary|safe|truncatechars:150 }}</div>		
-				{% endif %}					
 				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -104,9 +96,6 @@
 			<div class="content">
 				<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
 				<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>	
-				{% if match.summary %}
-					<div class="notification content">{{ match.summary|safe|truncatechars:150 }}</div>		
-				{% endif %}					
 				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 					<span class="icon">
 						<i class="far fa-play-circle"></i>
@@ -125,6 +114,7 @@
 {% endblock 'content' %}
 
 {% block 'sidebar' %}
+	{{ block.super }}
 
 	{% if all_series %}
 		<h2 class="is-capitalized">Current Series</h2>
@@ -136,14 +126,32 @@
 				</figure>
 			</div>
 			<div class="card-content">
-		    	<h3 class="title is-4 is-capitalized">{{ series.title }}</h3>
+		    	<h3 class="title is-5 is-capitalized">{{ series.title }}</h3>
 				<p class="subtitle is-7 is-uppercase has-text-primary"><strong>Start Date - {{ series.date|date:"d/m/Y" }}</strong></p>
-				<div class="content">
-					{{ series.summary|safe|truncatechars:250 }}
-				</div>
 		    </div>
 		</div>
 		{% endfor %}
 	{% endif %}
 
 {% endblock 'sidebar' %}
+
+{% block 'below_content' %}
+	<div class="hero is-primary">
+        <div class="hero-body">
+            <div class="container content">
+                <div class="columns is-desktop">
+                    <div class="column is-7-desktop">
+                        <p class="title is-2 is-size-3-mobile is-uppercase">are you grown up and ready to use science to your benefit or still believe in miracles?</p>
+                        <p class="subtitle is-6 heading"><em>We use the power of Staistics, Mathematics and Artificial Intelligence to predict the winner of the match.</em></p>
+                    </div>
+                    <div class="column is-5-desktop">
+                        <h4 class="title is-4 is-capitalized">How it works</h4>
+                        <p class="heading is-size-7">It all starts with data collected by cricinfo's statsguru and live betting data from betfair.</p>
+                        <p class="heading is-size-7">We use cricinfo's statsguru to get stats about ground, teams and players past performances, head to head stats and many more factors to predict the outcome.</p>
+                        <p class="heading is-size-7">We use betfair to fetch betting data and use Artifical intelligence to analyze this data to get information about current betting trends from all over the world.</p>  
+                    </div>  
+                </div>
+            </div>      
+        </div>
+    </div>
+{% endblock %}
