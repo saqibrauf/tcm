@@ -1,19 +1,39 @@
 from datetime import datetime
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Series, Match, Message
 
-admin.site.register(Series)
 
-class MessageInline(admin.TabularInline):
+#SETTINGS FOR SERIES MODEL###########################
+
+class SeriesAdmin(SummernoteModelAdmin):
+    summernote_fields = '__all__'
+
+admin.site.register(Series, SeriesAdmin)
+
+#####################################################
+
+
+#SETTINGS FOR MESSAGE MODEL##########################
+
+class MessageInline(admin.StackedInline):
     model = Message
     extra = 1
     ordering = ['-date']
+    fields = ('message',)
+    show_change_link = True
 
-class MessageAdmin(admin.ModelAdmin):
-	list_display = ('date', 'match', 'message')
+class MessageAdmin(SummernoteModelAdmin):
+    summernote_fields = '__all__'
+    list_display = ('date', 'match', 'message')
+
 admin.site.register(Message, MessageAdmin)
 
+######################################################
+
+
+#SETTINGS FOR MATCH MODEL#############################
 
 class MatchListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
@@ -53,13 +73,15 @@ class MatchListFilter(admin.SimpleListFilter):
         if self.value() == 'Recent':
             return queryset.filter(date__lt=now)
 
-class MatchAdmin(admin.ModelAdmin):
+
+class MatchAdmin(SummernoteModelAdmin):
 
     list_display = ('date', 'time', 'opponents', 'series')
     list_filter = (MatchListFilter,)
+    summernote_fields = '__all__'
 
     inlines = [
         MessageInline,
     ]
 
-admin.site.register(Match,MatchAdmin)
+admin.site.register(Match, MatchAdmin)

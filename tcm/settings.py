@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'ckeditor',
+    'django_summernote',
     'match.apps.MatchConfig',
 ]
 
@@ -135,19 +135,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SITE_ID = 1
 
-####################################
-    ##  CKEDITOR CONFIGURATION ##
-####################################
+SUMMERNOTE_CONFIG = {
+    'summernote': {
 
-CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+        'toolbar': [
+            ['para', ['style', 'ul', 'ol']],
+            ['style', ['bold', 'italic', 'underline']],            
+            ['insert', ['link', 'hr']],
+            ['misc', ['codeview', 'fullscreen']],
+        ],
 
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-CKEDITOR_IMAGE_BACKEND = "pillow"
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': None,
-    },
+        'width': '100%',
+        'height': '250',
+    }
 }
-
-###################################

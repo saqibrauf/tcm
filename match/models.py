@@ -2,7 +2,6 @@ from django.db import models
 from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-from ckeditor.fields import RichTextField
 
 
 #Main series table
@@ -10,7 +9,7 @@ class Series(models.Model):
 	date = models.DateField(default=datetime.today)
 	title = models.CharField(max_length=255, default='Enter Tournament Title')
 	series_slug = models.SlugField(max_length=255, default='', editable=False)
-	summary = RichTextField(blank=True)
+	summary = models.TextField(blank=True)
 	series_image = models.FileField(default='game.png')
 
 	def __str__(self):
@@ -31,7 +30,7 @@ class Match(models.Model):
 	date = models.DateField(default=datetime.now)
 	time = models.TimeField(default=datetime.now)
 	opponents = models.CharField(max_length=255, default='Opponents')
-	summary = RichTextField(blank=True)
+	summary = models.TextField(blank=True)
 	slug = models.SlugField(max_length=255, default='', editable=False)
 	prediction = models.CharField(max_length=50, default='Not Updated')
 	winner = models.CharField(max_length=50, default='Not Updated')
@@ -61,7 +60,7 @@ class Match(models.Model):
 class Message(models.Model):
 	match = models.ForeignKey(Match, on_delete=models.CASCADE)
 	date = models.DateTimeField(default=datetime.now)
-	message = RichTextField(max_length=255)
+	message = models.TextField(max_length=255)
 
 	def __str__(self):
 		return self.match.opponents.upper()
