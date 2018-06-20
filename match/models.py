@@ -7,19 +7,20 @@ from django.urls import reverse
 #Main series table
 class Series(models.Model):
 	date = models.DateField(default=datetime.today)
-	title = models.CharField(max_length=255, default='Enter Tournament Title')
+	title = models.CharField(max_length=255, default='Enter Series Title')
 	series_slug = models.SlugField(max_length=255, default='', editable=False)
 	series_image = models.FileField(default='game.png')
 
 	def __str__(self):
-		return self.title.upper()
+		return self.title
 
 	def save(self, *args, **kwargs):
+		self.title = self.title.upper()
 		self.series_slug = slugify(self.title)
 		super().save(*args, **kwargs)
 
 	class Meta:
-		verbose_name_plural = 'ALL SERIES'
+		verbose_name_plural = 'All Series'
 		ordering = ['-date']
 
     	
@@ -28,10 +29,10 @@ class Match(models.Model):
 	series = models.ForeignKey(Series, on_delete=models.CASCADE)
 	date = models.DateField(default=datetime.now)
 	time = models.TimeField(default=datetime.now)
-	opponents = models.CharField(max_length=255, default='Opponents')
+	opponents = models.CharField(max_length=255, default='Add Opponents')
 	slug = models.SlugField(max_length=255, default='', editable=False)
-	prediction = models.CharField(max_length=50, default='Not Updated')
-	winner = models.CharField(max_length=50, default='Not Updated')
+	prediction = models.CharField(max_length=50, blank=True)
+	winner = models.CharField(max_length=50, blank=True)
 	PR_RESULT = (
 		('Pass', 'Pass'),
 		('Fail', 'Fail'),
@@ -40,9 +41,10 @@ class Match(models.Model):
 	result = models.CharField(max_length=10, choices=PR_RESULT, default='No Result')
 
 	def __str__(self):
-		return self.opponents.upper()
+		return self.opponents
 
 	def save(self, *args, **kwargs):
+		self.opponents = self.opponents.lower()	
 		self.slug = slugify(self.opponents) + '-' + self.series.series_slug
 		super().save(*args, **kwargs)
 
@@ -50,7 +52,7 @@ class Match(models.Model):
 		return reverse('match_detail', args=[str(self.slug)])
 	
 	class Meta:
-		verbose_name_plural='MATCH SCHEDULE'
+		verbose_name_plural='All Matches'
 		ordering = ['-date', 'time']
 
 #Messages in Match
@@ -64,5 +66,5 @@ class Message(models.Model):
 		return self.match.opponents.upper()
 
 	class Meta:
-		verbose_name_plural = 'MESSAGES'
+		verbose_name_plural = 'All Messages'
 		ordering = ['-date']
