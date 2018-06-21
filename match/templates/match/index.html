@@ -12,7 +12,7 @@
 			<div class="columns is-desktop is-paddingless is-marginless">
 				<div class="column is-hidden-desktop is-paddingless is-marginless">
 					<figure class="image is-2by1">
-						<img src="{% static "images/EDITED-2-1-E.png" %}">	
+						<img src="{% static "images/EDITED-2-1-E.png" %}" alt="Today Cricket Matches">	
 					</figure>
 				</div>
 				<div class="column is-5-desktop">
@@ -152,7 +152,7 @@
 			
 			<div>
 				<h2 class="title is-4 is-size-5-mobile is-capitalized">Recent matches</h2>
-				<p class="subtitle is-6 is-size-7-mobile is-uppercase">List of recent matches played in past few days.</p>
+				<p class="subtitle is-6 is-size-7-mobile is-uppercase">List of recent matches.</p>
 			</div>			
 		</div>
 	</div>
@@ -171,7 +171,7 @@
 				</div>	
 			{% empty %}			
 				<div class="notification is-primary">
-					<p class="is-uppercase">No match is scheduled today.</p>
+					<p class="is-uppercase">No record found.</p>
 				</div>			
 			{% endfor %}
 		</div>		
@@ -189,7 +189,7 @@
 		<div class="card">
 			<div class="card-image" >
 				<figure class="image is-16by9 is-marginless">
-					<img src="{{ series.series_image.url }}">
+					<img src="{{ series.series_image.url }}" alt="{{ series.title }}">
 				</figure>
 			</div>
 			<div class="card-content">
