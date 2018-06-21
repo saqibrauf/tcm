@@ -6,38 +6,44 @@
 
 {% block 'above_content' %}
 
-<section class="hero is-medium is-light banner-bg">
-	<div class="hero-body" style="background-color: rgba(255, 255, 255, 0.8);">
-		<div class="container has-text-centered">
-			<div class="columns">
-				<div class="column is-8 is-offset-2">
-					<h2 class="title is-2 is-size-3-mobile is-capitalized">Get accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
+<section id="top-header" class="hero is-light banner-bg">
+	<div class="hero-body">
+		<div class="container">
+			<div class="columns is-desktop is-paddingless is-marginless">
+				<div class="column is-hidden-desktop is-paddingless is-marginless">
+					<figure class="image is-2by1">
+						<img src="{% static "images/EDITED-2-1-E.png" %}">	
+					</figure>
 				</div>
-			</div>
-			<div class="level is-hidden">
-				<div class="level-item has-text-centered">
-					<div>
-						<p class="heading is-size-5">Total matches</p>
-						<p class="title is-1">3,456</p>
+				<div class="column is-5-desktop">
+					<h2 class="title is-3 is-size-4-mobile has-text-centered-touch is-capitalized">Get accurate predictions and betting tips for all upcoming and today's cricket matches</h2><hr>
+					<div class="level is-mobile">
+						<div class="level-item has-text-centered">
+							<div>
+								<p class="heading">Matches</p>
+								<p class="title is-3 is-size-4-mobile">0</p>
+							</div>
+						</div>
+						<div class="level-item has-text-centered">
+							<div>
+								<p class="heading">Predicted</p>
+								<p class="title is-3 is-size-4-mobile">0</p>
+							</div>
+						</div>
+						<div class="level-item has-text-centered">
+							<div>
+								<p class="heading">Won</p>
+								<p class="title is-3 is-size-4-mobile">0</p>
+							</div>
+						</div>
+						<div class="level-item has-text-centered">
+							<div>
+								<p class="heading">Accuracy</p>
+								<p class="title is-3 is-size-4-mobile">0</p>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="level-item has-text-centered">
-					<div>
-						<p class="heading is-size-5">Predicted</p>
-						<p class="title is-1">123</p>
-					</div>
-				</div>
-				<div class="level-item has-text-centered">
-					<div>
-						<p class="heading is-size-5">Won</p>
-						<p class="title is-1">456K</p>
-					</div>
-				</div>
-				<div class="level-item has-text-centered">
-					<div>
-						<p class="heading is-size-5">Accuracy</p>
-						<p class="title is-1">789</p>
-					</div>
+					<hr class="is-hidden-mobile">
 				</div>
 			</div>
 		</div>		
@@ -48,12 +54,8 @@
 
 {% block 'content' %}
 
-<figure class="image is-16by9 is-marginless is-hidden" style="margin-bottom: 1.5rem !important;">
-	<img src="{% static 'images/bg11.png' %}">
-</figure>
-
 <div class="content">
-	<p class="heading is-size-5"><em>Get predictions of almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major <strong>domestic cricket leagues</strong> around the world.</em></p>
+	<p class="heading is-size-5">Get predictions of almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major <strong>domestic cricket leagues</strong> around the world.</p>
 	<p><em>Some of the famous leagues are <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Natwest T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong> and <strong>Tamil Nadu Premier League</strong>.</em></p>
 	<hr>
 </div>
@@ -71,8 +73,8 @@
 			</div>
 			
 			<div>
-				<h2 class="title is-4 is-size-5-mobile is-capitalized">List of Today's Matches</h2>
-				<p class="subtitle is-6 is-size-7-mobile is-uppercase">Here's a list of all matches being played today.</p>
+				<h2 class="title is-4 is-size-5-mobile is-capitalized">Today's matches</h2>
+				<p class="subtitle is-6 is-size-7-mobile is-uppercase">List of all today's matches.</p>
 			</div>			
 		</div>
 	</div>
@@ -110,8 +112,8 @@
 			</div>
 			
 			<div>
-				<h2 class="title is-4 is-size-5-mobile is-capitalized">List of upcoming matches</h2>
-				<p class="subtitle is-6 is-size-7-mobile is-uppercase">Here's a list of all upcoming matches.</p>
+				<h2 class="title is-4 is-size-5-mobile is-capitalized">Upcoming matches</h2>
+				<p class="subtitle is-6 is-size-7-mobile is-uppercase">List of all upcoming matches.</p>
 			</div>			
 		</div>
 	</div>
@@ -149,8 +151,8 @@
 			</div>
 			
 			<div>
-				<h2 class="title is-4 is-size-5-mobile is-capitalized">List of Recent Cricket Matches</h2>
-				<p class="subtitle is-6 is-size-7-mobile is-uppercase">Here's a list of recent matches played in past few days.</p>
+				<h2 class="title is-4 is-size-5-mobile is-capitalized">Recent matches</h2>
+				<p class="subtitle is-6 is-size-7-mobile is-uppercase">List of recent matches played in past few days.</p>
 			</div>			
 		</div>
 	</div>

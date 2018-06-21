@@ -31,13 +31,6 @@ hr {
 	background-color: whitesmoke;
 }
 
-.banner-bg {
-	background-image: url('../images/bw.jpg');
-	background-position: center top;
-	background-size: cover;
-	background-repeat: no-repeat;
-}
-
 .notification a:not(.button) {
 	text-decoration: none;
 }
@@ -49,8 +42,9 @@ hr {
 		font-size: 16px;
 	}
 
-	.nav-margin {
-		margin: 0 2rem !important;
+	#top-header .hero-body {
+		padding: 6rem 1.5rem;
+		border-bottom: 2px solid #e8e8e8;
 	}
 
 	main .section {
@@ -63,6 +57,23 @@ hr {
 
 	.sidebar {
 		background-color: white;
+	}	
+
+	.banner-bg {
+		background-image: url('../images/EDITED-2-1-E-R.png');
+		background-position: center top;
+		background-size: cover;
+		background-repeat: no-repeat;
 	}
 
+}
+
+@media screen and (max-width: 1088px) {
+	#top-header .hero-body {
+		padding: 0;
+	}
+
+	#top-header figure {
+		margin-bottom: 1.5rem !important;
+	}
 }
