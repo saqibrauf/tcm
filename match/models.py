@@ -12,10 +12,10 @@ class Series(models.Model):
 	series_image = models.FileField(default='game.png')
 
 	def __str__(self):
-		return self.title
+		return self.title.upper()
 
 	def save(self, *args, **kwargs):
-		self.title = self.title.upper()
+		self.title = self.title.lower()
 		self.series_slug = slugify(self.title)
 		super().save(*args, **kwargs)
 
@@ -34,17 +34,19 @@ class Match(models.Model):
 	prediction = models.CharField(max_length=50, blank=True)
 	winner = models.CharField(max_length=50, blank=True)
 	PR_RESULT = (
-		('Pass', 'Pass'),
-		('Fail', 'Fail'),
-		('No Result', 'No Result'),
+		('pass', 'Pass'),
+		('fail', 'Fail'),
+		('no result', 'No Result'),
 	)
-	result = models.CharField(max_length=10, choices=PR_RESULT, default='No Result')
+	result = models.CharField(max_length=10, choices=PR_RESULT, default='no result')
 
 	def __str__(self):
-		return self.opponents
+		return self.opponents.upper()
 
 	def save(self, *args, **kwargs):
-		self.opponents = self.opponents.lower()	
+		self.opponents = self.opponents.lower()
+		self.prediction = self.prediction.lower()
+		self.winner = self.winner.lower()
 		self.slug = slugify(self.opponents) + '-' + self.series.series_slug
 		super().save(*args, **kwargs)
 
