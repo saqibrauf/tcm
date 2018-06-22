@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block 'title' %}{{ match.opponents|title }} {{ match.series.title|title }} | Today Cricket Matches{% endblock %}
+{% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 
-
-{% block 'content' %}
+{% block 'content' %}	
 	<h1 class="title is-capitalized is-size-3-mobile">{{ match.opponents }}</h1>
 	<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>
 

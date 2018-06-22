@@ -19,6 +19,6 @@ def match_detail(request, slug):
 		series = Series.objects.get(pk=match.series.id)
 		schedule = series.match_set.all().order_by('date')
 		messages = match.message_set.all()
-		return render(request, 'match/detail.html', context={'series':series, 'schedule':schedule, 'match':match, 'messages':messages})
+		return render(request, 'match/match_detail.html', context={'series':series, 'schedule':schedule, 'match':match, 'messages':messages})
 	except Match.DoesNotExist:
 		return render(request, 'match/404.html')

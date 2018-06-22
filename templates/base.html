@@ -6,16 +6,11 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="0QEiEf6HcMWh_zhOhNU8KBYaX1O-BoGBw80HUQnWiqk" />
-
+    {% block 'canonical' %}{% endblock %}
     <title>{% block 'title' %}Today Cricket Matches{% endblock %}</title>
-
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Contrail+One:400|PT+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
-    <!-- Favicon -->
     <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
-
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
