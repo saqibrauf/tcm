@@ -9,11 +9,17 @@ def index(request):
 	todays_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date','time')
 	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date', 'time')[:20]
 	recent_matches = Match.objects.filter(date__lt=now).order_by('-date', '-time')[:20]
-	all_series = Series.objects.all().order_by('-date')[:5]	
+	all_series = Series.objects.all().order_by('-date')[:5]
+
+
 	recent_count = Match.objects.filter(date__lt=now).count()
-	predicted = Match.objects.exclude(prediction='').count()
+	predicted = Match.objects.exclude(prediction='').count()	
 	won = Match.objects.filter(result='pass').count()
-	accuracy = int((won/predicted)*100)
+
+	try:
+	    accuracy = int((won/predicted)*100)
+	except ZeroDivisionError:
+	    accuracy = 0	
 
 	context = {
 		'todays_matches' : todays_matches,
