@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block 'title' %}Today Cricket Matches{% endblock %}
+{% block 'title' %}Get Accurate Predictions And Betting Tips For All Upcoming And Today's Cricket Matches{% endblock %}
 {% block 'description' %}Get accurate predictions and betting tips for all upcoming and today's cricket matches. Get predictions of almost all the One Day Internationals, T20 Internationals, Indian Premier League, Big Bash League, Pakistan Super League, Bangladesh Premier League, Carribbean Premier League, Natwest T20 Blast, Royal London One Day Cup, Karnatka Premier League and Tamil Nadu Premier League.{% endblock %}
 
 {% block 'above_content' %}
@@ -22,25 +22,25 @@
 						<div class="level-item has-text-centered">
 							<div>
 								<p class="heading">Matches</p>
-								<p class="title is-2 is-size-4-mobile">0</p>
+								<p class="title is-2 is-size-4-mobile">{{recent_count}}</p>
 							</div>
 						</div>
 						<div class="level-item has-text-centered">
 							<div>
 								<p class="heading">Predicted</p>
-								<p class="title is-2 is-size-4-mobile">0</p>
+								<p class="title is-2 is-size-4-mobile">{{predicted}}</p>
 							</div>
 						</div>
 						<div class="level-item has-text-centered">
 							<div>
 								<p class="heading">Won</p>
-								<p class="title is-2 is-size-4-mobile">0</p>
+								<p class="title is-2 is-size-4-mobile">{{won}}</p>
 							</div>
 						</div>
 						<div class="level-item has-text-centered">
 							<div>
 								<p class="heading">Accuracy</p>
-								<p class="title is-2 is-size-4-mobile">0</p>
+								<p class="title is-2 is-size-4-mobile">{{accuracy}}%</p>
 							</div>
 						</div>
 					</div>

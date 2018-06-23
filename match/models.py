@@ -9,6 +9,7 @@ class Series(models.Model):
 	date = models.DateField(default=datetime.today)
 	title = models.CharField(max_length=255, default='Enter Series Title')
 	series_slug = models.SlugField(max_length=255, default='', editable=False)
+	summary = models.TextField(blank=True)
 	series_image = models.FileField(default='game.png')
 
 	def __str__(self):

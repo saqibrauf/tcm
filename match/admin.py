@@ -38,7 +38,7 @@ admin.site.register(Message, MessageAdmin)
 class MatchListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
-    title = _('Sort Matches')
+    title = _('Matches')
 
     # Parameter for the filter that will be used in the URL query.
     parameter_name = 'now'
@@ -67,11 +67,11 @@ class MatchListFilter(admin.SimpleListFilter):
         # to decide how to filter the queryset.
         now = datetime.today()
         if self.value() == 'Todays':
-            return queryset.filter(date__day=now.day, date__month=now.month, date__year=now.year)
+            return queryset.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date', 'time')
         if self.value() == 'Upcoming':
-            return queryset.filter(date__gt=now)
+            return queryset.filter(date__gt=now).order_by('date', 'time')
         if self.value() == 'Recent':
-            return queryset.filter(date__lt=now)
+            return queryset.filter(date__lt=now).order_by('-date', '-time')
 
 
 class MatchAdmin(SummernoteModelAdmin):

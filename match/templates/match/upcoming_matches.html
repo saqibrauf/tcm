@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block 'title' %}Get Accurate Predictions And Betting Tips For All Upcoming And Today's Cricket Matches{% endblock %}
+
+{% block 'description' %}Get accurate predictions and betting tips for all upcoming and today's cricket matches. Get predictions of almost all the One Day Internationals, T20 Internationals, Indian Premier League, Big Bash League, Pakistan Super League, Bangladesh Premier League, Carribbean Premier League, Natwest T20 Blast, Royal London One Day Cup, Karnatka Premier League and Tamil Nadu Premier League.{% endblock %}
+
+{% block 'content' %}
+
+<h1 class="title is-2 is-capitalized">List of all upcoming matches</h1>
+<hr>
+{% for match in upcoming_matches %}	
+	<div class="content">
+		<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
+		<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>
+		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+			<span class="icon">
+				<i class="far fa-play-circle"></i>
+			</span>
+			<span>View Prediction</span>
+		</a>
+	</div>	
+{% empty %}			
+	<div class="notification is-primary">
+		<p class="is-uppercase">No match is scheduled.</p>
+	</div>			
+{% endfor %}
+
+{% endblock %}
