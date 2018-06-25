@@ -51,7 +51,7 @@
 	</div>
 </section>
 
-{% endblock %}
+{% endblock 'above_content' %}
 
 {% block 'content' %}
 
@@ -196,6 +196,9 @@
 			<div class="card-content">
 		    	<h3 class="title is-5 is-capitalized">{{ series.title }}</h3>
 				<p class="subtitle is-7 is-uppercase has-text-primary"><strong>Start Date - {{ series.date|date:"d/m/Y" }}</strong></p>
+				{% if series.summary %}
+					<div class="content">{{ series.summary|safe|truncatewords:50 }}</div>
+				{% endif %}
 		    </div>
 		</div>
 		{% endfor %}
