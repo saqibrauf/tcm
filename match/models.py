@@ -24,11 +24,12 @@ class Series(models.Model):
 		verbose_name_plural = 'All Series'
 		ordering = ['-date']
 
-    	
+
 #Matches in Tournament
-class Match(models.Model):	
+class Match(models.Model):
 	series = models.ForeignKey(Series, on_delete=models.CASCADE)
 	date = models.DateField(default=datetime.now)
+	updated_at = models.DateTimeField(auto_now=True, null=True)
 	time = models.TimeField(default=datetime.now)
 	opponents = models.CharField(max_length=255, default='Add Opponents')
 	slug = models.SlugField(max_length=255, default='', editable=False)
@@ -53,7 +54,7 @@ class Match(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('match_detail', args=[str(self.slug)])
-	
+
 	class Meta:
 		verbose_name_plural='All Matches'
 		ordering = ['-date', 'time']
@@ -62,7 +63,7 @@ class Match(models.Model):
 
 class Message(models.Model):
 	match = models.ForeignKey(Match, on_delete=models.CASCADE)
-	date = models.DateTimeField(default=datetime.now)
+	date = models.DateTimeField(auto_now_add=True)
 	message = models.TextField(max_length=255)
 
 	def __str__(self):

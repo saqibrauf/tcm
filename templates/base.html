@@ -9,22 +9,22 @@
     {% block 'canonical' %}{% endblock %}
     <title>{% block 'title' %}Today Cricket Matches{% endblock %}</title>
     <meta name="description" content="{% block 'description' %}{% endblock %}">
-    <link href="https://fonts.googleapis.com/css?family=Contrail+One:400|PT+Sans:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'images/cricket.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47699964-4"></script>
+    <!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-47699964-4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'UA-47699964-4');
-    </script>
+    </script-->
 </head>
 
-<body>
+<body class="content">
 	<header>
          {% include 'navbar.html' %}
     </header>

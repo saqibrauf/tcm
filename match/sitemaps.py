@@ -9,7 +9,7 @@ class MatchSitemap(Sitemap):
         return Match.objects.all()
 
     def lastmod(self, obj):
-        return obj.date
+        return obj.updated_at
         
 
 class SeriesSitemap(Sitemap):    

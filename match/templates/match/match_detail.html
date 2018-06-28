@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'master.html' %}
 {% load static %}
 
-{% block 'title' %}{{ match.opponents|title }}, {{ match.series.title|title }} - Today Cricket Matches{% endblock %}
+{% block 'title' %}Who Will Win {{ match.opponents|title }} - Get Accurate Match Prediction{% endblock %}
 {% block 'description' %}Get accurate match prediction and betting tips for {{ match.opponents }}. See full schedule of {{ match.series.title }}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
@@ -29,21 +29,3 @@
 	{% endfor %}
 
 {% endblock 'content' %}
-
-{% block 'sidebar' %}
-
-
-<figure class="image is-16by9 is-marginless">
-	<img src="{{ series.series_image.url }}">
-</figure>
-<h3 class="is-uppercase">{{ series.title }}</h3>
-<h4 class="is-uppercase">Complete Schedule</h4>
-{% for schedule in schedule  %}
-
-	<ul>
-		<li><p class="title is-6 is-uppercase"><strong><a class="has-text-primary" href="{% url 'match_detail' schedule.slug %}">{{ schedule.opponents }}</a></strong></p><p class="subtitle is-7">{{ schedule.date }}</p></li>
-	</ul>
-
-{% endfor %}
-
-{% endblock %}

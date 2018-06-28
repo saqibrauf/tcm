@@ -5,12 +5,12 @@
 .content h4, h4,
 .content h5, h5,
 .content h6, h6 {
-	font-family: 'Contrail One', sans-serif !important;
-	font-weight: 400 !important;
+	font-family: 'Open Sans', sans-serif !important;
+	font-weight: 800 !important;
 }
 
 body {
-	font-family: 'PT Sans', sans-serif !important;
+	font-family: 'Open Sans', sans-serif !important;
 	font-weight: 400 !important;
 }
 
@@ -18,6 +18,20 @@ html {
 	word-wrap: break-word;
 	word-break: break-word;
 }
+
+.gradient {
+    background: linear-gradient(to right, #107dac, #189ad3)
+}
+
+.gradient-1 {
+    background: linear-gradient(to right, #fc8b56, #fd5656);
+}
+
+.hero.is-white a.navbar-item:hover {
+    background-color: transparent;
+}
+
+
 
 hr {
 	background-color: #e8e8e8;
@@ -27,8 +41,13 @@ hr {
 	margin-bottom: 2rem;
 }
 
-.sidebar {
-	background-color: whitesmoke;
+.image.is-128x128 {
+    height: 256px;
+    width: 256px;
+}
+
+.hero-image {
+    margin: 0 auto !important;
 }
 
 .notification a:not(.button) {
@@ -42,38 +61,16 @@ hr {
 		font-size: 16px;
 	}
 
-	#top-header .hero-body {
-		padding: 6rem 1.5rem;
-		border-bottom: 2px solid #e8e8e8;
-	}
-
-	main .section {
-		padding: 3rem 2rem 3rem 0;
-	}
-
-	aside .section {
-		padding: 3rem 0 3rem 2rem;
-	}
-
-	.sidebar {
-		background-color: white;
-	}	
-
 	.banner-bg {
-		background-image: url('../images/today-cricket-matches.png');
-		background-position: center;
-		background-size: cover;
-		background-repeat: no-repeat;
+		background-image: url('../images/border.png');
+		background-position: center bottom;
+		background-size: contain;
+		background-repeat: repeat-x;
 	}
 
-}
-
-@media screen and (max-width: 1088px) {
 	#top-header .hero-body {
-		padding: 0;
-	}
+        padding-top: 3rem;
+        padding-bottom: 0rem;
+    }
 
-	#top-header figure {
-		margin-bottom: 1.5rem !important;
-	}
 }

@@ -1,25 +1,28 @@
-
-<nav class="navbar is-dark has-shadow">
-    <div class="container">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="{% url 'index' %}">
-                {% url 'index' as home_url %}
-                {% if request.get_full_path == home_url %}
-                    <h1 class="title is-6 is-uppercase has-text-white">Today Cricket Matches</h1>
-                {% else %}
-                    <p class="title is-6 is-uppercase has-text-white">Today Cricket Matches</p>
-                {% endif %}
-            </a>
-            <div class="navbar-burger burger" data-target="navMain">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <header class="hero is-white">
+        <div class="hero-head">
+            <nav class="navbar has-shadow">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="{% url 'index' %}">
+                            {% url 'index' as home_url %}
+                            {% if request.get_full_path == home_url %}
+                                <h1 class="title is-6 is-uppercase is-marginless">Today Cricket Matches</h1>
+                            {% else %}
+                                <p class="title is-6 is-uppercase is-marginless">Today Cricket Matches</p>
+                            {% endif %}
+                        </a>
+                        <div class="navbar-burger burger" data-target="navMain">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div id="navMain" class="navbar-menu">
+                        <div class="navbar-end">
+                            {% include 'nav-links.html' %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </div>
-        <div id="navMain" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item is-uppercase" href="{% url 'upcoming_matches' %}">Upcoming matches</a>
-            </div>
-        </div>
-    </div>
-</nav>
+    </header>

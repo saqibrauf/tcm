@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="0QEiEf6HcMWh_zhOhNU8KBYaX1O-BoGBw80HUQnWiqk" />
+    {% block 'canonical' %}{% endblock %}
+    <title>{% block 'title' %}Today Cricket Matches{% endblock %}</title>
+    <meta name="description" content="{% block 'description' %}{% endblock %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'images/cricket.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!--script async src="https://www.googletagmanager.com/gtag/js?id=UA-47699964-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-47699964-4');
+    </script-->
+</head>
+
+<body class="content">
+<header>
+    {% include 'navbar.html' %}
+    <section id="top-header" class="hero is-primary gradient">
+        <div class="hero-body banner-bg">
+            <div class="container">
+                <div class="columns is-desktop is-paddingless is-marginless">
+                    <div class="column is-6-desktop is-paddingless is-marginless">
+                        <h2 class="title is-2 is-size-3-mobile has-text-centered-touch">Get accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
+                        <p class="has-text-centered-touch">Get predictions of almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong> and all the major <strong>domestic cricket leagues</strong> around the world.</p>
+                        <p class="has-text-centered-touch"><a class="button is-black is-medium">DOWNLOAD ANDROID APP</a></p>
+                    </div>
+                    <div class="column is-6-desktop is-hidden-touch">
+                        <figure class="image is-128x128 hero-image">
+                            <img src="{% static 'images/cricket.png' %}">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+
+{% block 'above_content' %}{% endblock %}
+
+<main class="section">
+    <div class="container">
+        {% block 'content' %}{% endblock %}
+    </div>
+</main>
+
+{% block 'below_content' %}{% endblock %}
+
+<footer class="hero is-dark">
+    <div class="hero-body">
+        <div class="container content">
+
+        </div>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

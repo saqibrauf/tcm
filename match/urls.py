@@ -16,5 +16,5 @@ urlpatterns = [
     #Website Views
     path('', views.index, name='index' ),    
     path('upcoming-matches/', views.upcoming_matches, name='upcoming_matches'),
-    path('<slug>/', views.match_detail, name='match_detail' ),
+    path('predictions/<slug>/', views.match_detail, name='match_detail' ),
 ]

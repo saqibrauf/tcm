@@ -11,11 +11,8 @@ def index(request):
 	recent_matches = Match.objects.filter(date__lt=now).order_by('-date', '-time')[:20]
 	all_series = Series.objects.all().order_by('-date')[:5]
 
-
-	recent_count = Match.objects.filter(date__lt=now).count()
 	predicted = Match.objects.exclude(prediction='').count()	
 	won = Match.objects.filter(result='pass').count()
-
 	try:
 	    accuracy = int((won/predicted)*100)
 	except ZeroDivisionError:
@@ -28,7 +25,6 @@ def index(request):
 		'all_series' : all_series,
 
 		#stats related
-		'recent_count' : recent_count,
 		'predicted' : predicted,
 		'won' : won,
 		'accuracy' : accuracy,
