@@ -2,6 +2,7 @@
 *~
 __pycache__
 .env
+tcm-db
 /media
 /static
 .DS_Store
