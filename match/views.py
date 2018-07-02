@@ -1,15 +1,23 @@
 from django.http import Http404
 from django.shortcuts import render
-from datetime import datetime
+from django.utils import timezone
 from .models import Series, Match, Message
 
 
 def index(request):
-	now = datetime.today()
-	todays_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date','time')
-	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date', 'time')[:20]
-	recent_matches = Match.objects.filter(date__lt=now).order_by('-date', '-time')[:20]
+	now = timezone.now()
+
+	todays_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')	
+	
+	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')[:20]
+
+	recent_matches = Match.objects.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')[:20]
+
 	all_series = Series.objects.all().order_by('-date')[:5]
+
+	latest_series = Series.objects.all().order_by('-date')[0]
+
+	latest_match = Match.objects.filter(date__gt=now).order_by('date')[0]
 
 	predicted = Match.objects.exclude(prediction='').count()	
 	won = Match.objects.filter(result='pass').count()
@@ -23,6 +31,8 @@ def index(request):
 		'upcoming_matches' : upcoming_matches,
 		'recent_matches' : recent_matches,		
 		'all_series' : all_series,
+		'latest_series' : latest_series,
+		'latest_match' : latest_match,
 
 		#stats related
 		'predicted' : predicted,
@@ -44,8 +54,13 @@ def match_detail(request, slug):
 
 
 def upcoming_matches(request):
-	now = datetime.today()
-	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date', 'time')
+	now = timezone.now()
+	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date')[:60]
 
 	return render(request, 'match/upcoming_matches.html', context={'upcoming_matches' : upcoming_matches})
 
+
+def series_detail(request, slug):
+	series = Series.objects.get(series_slug=slug)
+
+	return render(request, 'match/series_detail.html', context={'series' : series})

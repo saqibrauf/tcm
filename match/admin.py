@@ -76,7 +76,7 @@ class MatchListFilter(admin.SimpleListFilter):
 
 class MatchAdmin(SummernoteModelAdmin):
 
-    list_display = ('opponents', 'date', 'time', 'series')
+    list_display = ('opponents', 'date', 'series')
     list_filter = (MatchListFilter,)
     summernote_fields = '__all__'
 

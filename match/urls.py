@@ -6,7 +6,7 @@ from .sitemaps import MatchSitemap, SeriesSitemap
 
 sitemaps = {
     'match': MatchSitemap(),
-    #'series' : SeriesSitemap(),
+    'series' : SeriesSitemap(),
 }
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('', views.index, name='index' ),    
     path('upcoming-matches/', views.upcoming_matches, name='upcoming_matches'),
     path('predictions/<slug>/', views.match_detail, name='match_detail' ),
+    path('series/<slug>/', views.series_detail, name='series_detail' ),
 ]

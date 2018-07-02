@@ -1,12 +1,12 @@
 from django.db import models
-from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.utils import timezone
 
 
 #Main series table
 class Series(models.Model):
-	date = models.DateField(default=datetime.today)
+	date = models.DateTimeField(default=timezone.now)
 	title = models.CharField(max_length=255, default='Enter Series Title')
 	series_slug = models.SlugField(max_length=255, default='', editable=False)
 	summary = models.TextField(blank=True)
@@ -20,6 +20,9 @@ class Series(models.Model):
 		self.series_slug = slugify(self.title)
 		super().save(*args, **kwargs)
 
+	def get_absolute_url(self):
+		return reverse('series_detail', args=[str(self.series_slug)])
+
 	class Meta:
 		verbose_name_plural = 'All Series'
 		ordering = ['-date']
@@ -28,9 +31,8 @@ class Series(models.Model):
 #Matches in Tournament
 class Match(models.Model):
 	series = models.ForeignKey(Series, on_delete=models.CASCADE)
-	date = models.DateField(default=datetime.now)
-	updated_at = models.DateTimeField(auto_now=True, null=True)
-	time = models.TimeField(default=datetime.now)
+	date = models.DateTimeField(default=timezone.now)
+	updated_at = models.DateTimeField(default=timezone.now, editable=False)
 	opponents = models.CharField(max_length=255, default='Add Opponents')
 	slug = models.SlugField(max_length=255, default='', editable=False)
 	prediction = models.CharField(max_length=50, blank=True)
@@ -57,13 +59,13 @@ class Match(models.Model):
 
 	class Meta:
 		verbose_name_plural='All Matches'
-		ordering = ['-date', 'time']
+		ordering = ['-date']
 
 #Messages in Match
 
 class Message(models.Model):
 	match = models.ForeignKey(Match, on_delete=models.CASCADE)
-	date = models.DateTimeField(auto_now_add=True)
+	date = models.DateTimeField(default=timezone.now, editable=False)
 	message = models.TextField(max_length=255)
 
 	def __str__(self):

@@ -6,19 +6,21 @@
 
 {% block 'content' %}
 
-<h1 class="title is-2 is-capitalized">List of all upcoming matches</h1>
+<h1 class="has-text-primary">List of all upcoming matches</h1>
+<p>Schedule of all upcoming matches coming your way in the next days.</p>
 <hr>
 {% for match in upcoming_matches %}	
 	<div class="content">
-		<h3 class="title is-5 is-capitalized has-text-primary">{{ match.opponents }}</h3>
-		<p class="subtitle is-7 is-uppercase"><strong>{{ match.series.title }} - {{ match.date|date:"d/m/Y" }} - {{ match.time|date:"h:i A" }}</strong></p>
-		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-			<span class="icon">
-				<i class="far fa-play-circle"></i>
-			</span>
-			<span>View Prediction</span>
-		</a>
-	</div>	
+				<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+				<h3 class="is-marginless">{{ match.opponents }}</h3>
+				<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+						<span class="icon">
+							<i class="far fa-play-circle"></i>
+						</span>
+					<span>View Prediction</span>
+				</a>
+			</div>
 {% empty %}			
 	<div class="notification is-primary">
 		<p class="is-uppercase">No match is scheduled.</p>

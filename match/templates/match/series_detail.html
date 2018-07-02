@@ -1,0 +1,12 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block 'title' %}{% endblock %}
+{% block 'description' %}{% endblock %}
+{% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
+
+
+{% block 'content' %}	
+	<h1>{{ series.title }}</h1>
+
+{% endblock 'content' %}
