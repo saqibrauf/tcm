@@ -7,20 +7,20 @@ from .models import Series, Match, Message
 def index(request):
 	now = timezone.now()
 
-	todays_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')	
+	today_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')	
 	
-	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')[:20]
+	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
 
-	recent_matches = Match.objects.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')[:20]
+	recent_matches = Match.objects.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')
 
-	all_series = Series.objects.all().order_by('-date')
+	all_series = Series.objects.order_by('-date')
 
-	latest_series = Series.objects.all().order_by('-date')[0]
+	latest_series = Series.objects.order_by('-date')
 
-	latest_match = Match.objects.filter(date__gt=now).order_by('date')[0]
+	latest_match = Match.objects.filter(date__gt=now)
 
 	context = {
-		'todays_matches' : todays_matches,
+		'today_matches' : today_matches,
 		'upcoming_matches' : upcoming_matches,
 		'recent_matches' : recent_matches,		
 		'all_series' : all_series,
@@ -44,7 +44,7 @@ def match_detail(request, slug):
 
 def upcoming_matches(request):
 	now = timezone.now()
-	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date')[:60]
+	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date')
 
 	return render(request, 'match/upcoming_matches.html', context={'upcoming_matches' : upcoming_matches})
 
