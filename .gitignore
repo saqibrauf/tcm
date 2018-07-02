@@ -2,7 +2,7 @@
 *~
 __pycache__
 .env
-tcm-db
+tcm-CM.sqlite3
 /media
 /static
 .DS_Store
