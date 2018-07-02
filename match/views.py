@@ -19,15 +19,6 @@ def index(request):
 
 	latest_match = Match.objects.filter(date__gt=now).order_by('date')[0]
 
-	""""
-	predicted = Match.objects.exclude(prediction='').count()	
-	won = Match.objects.filter(result='pass').count()
-	try:
-	    accuracy = int((won/predicted)*100)
-	except ZeroDivisionError:
-	    accuracy = 0	
-	"""
-
 	context = {
 		'todays_matches' : todays_matches,
 		'upcoming_matches' : upcoming_matches,
@@ -36,7 +27,7 @@ def index(request):
 		'latest_series' : latest_series,
 		'latest_match' : latest_match,
 	}
-	
+
 	return render(request, 'match/index.html', context)
 
 
