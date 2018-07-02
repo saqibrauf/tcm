@@ -13,7 +13,7 @@ def index(request):
 
 	recent_matches = Match.objects.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')[:20]
 
-	#all_series = Series.objects.all().order_by('-date')[:5]
+	all_series = Series.objects.all().order_by('-date')[:5]
 
 	latest_series = Series.objects.all().order_by('-date')[0]
 
