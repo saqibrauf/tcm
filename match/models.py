@@ -24,7 +24,7 @@ class Series(models.Model):
 		return reverse('series_detail', args=[str(self.series_slug)])
 
 	class Meta:
-		verbose_name_plural = 'All Series'
+		verbose_name_plural = 'Series'
 		ordering = ['-date']
 
 
@@ -58,7 +58,7 @@ class Match(models.Model):
 		return reverse('match_detail', args=[str(self.slug)])
 
 	class Meta:
-		verbose_name_plural='All Matches'
+		verbose_name_plural='Matches'
 		ordering = ['-date']
 
 #Messages in Match
@@ -72,5 +72,5 @@ class Message(models.Model):
 		return self.match.opponents.upper()
 
 	class Meta:
-		verbose_name_plural = 'All Messages'
+		verbose_name_plural = 'Messages'
 		ordering = ['-date']

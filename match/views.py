@@ -17,7 +17,7 @@ def index(request):
 
 	latest_series = Series.objects.order_by('-date')
 
-	latest_match = Match.objects.filter(date__gt=now)
+	latest_match = Match.objects.filter(date__gt=now).order_by('date')
 
 	context = {
 		'today_matches' : today_matches,
