@@ -95,7 +95,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'today_CM',
+        'NAME': 'db234',
     }
 }
 
