@@ -28,6 +28,17 @@ class Series(models.Model):
 		ordering = ['-date']
 
 
+#TAGS
+class Tag(models.Model):
+	tag_name = models.CharField(max_length=50)
+	slug = models.SlugField(max_length=50, editable=False)
+
+	def save(self, *args, **kwargs):
+		self.tag_name = self.tag_name.lower()
+		self.slug = slugify(self.tag_name)
+		super().save(*args, **kwargs)
+
+
 #Matches in Tournament
 class Match(models.Model):
 	series = models.ForeignKey(Series, on_delete=models.CASCADE)
@@ -35,6 +46,18 @@ class Match(models.Model):
 	updated_at = models.DateTimeField(default=timezone.now, editable=False)
 	opponents = models.CharField(max_length=255, default='Add Opponents')
 	slug = models.SlugField(max_length=255, default='', editable=False)
+	score_url = models.CharField(max_length=255, blank=True)
+	M_STATUS = (
+		('not started', 'Not Started'),
+		('live', 'Live'),
+		('completed', 'Completed'),
+	)
+	status = models.CharField(max_length=12, choices=M_STATUS, default='not started')
+	team_a = models.CharField(max_length=50, blank=True)
+	team_a_score = models.CharField(max_length=50, blank=True)
+	team_b = models.CharField(max_length=50, blank=True)
+	team_b_score = models.CharField(max_length=50, blank=True)
+	notes = models.CharField(max_length=100, blank=True)
 	prediction = models.CharField(max_length=50, blank=True)
 	winner = models.CharField(max_length=50, blank=True)
 	PR_RESULT = (

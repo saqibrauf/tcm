@@ -67,16 +67,16 @@ class MatchListFilter(admin.SimpleListFilter):
         # to decide how to filter the queryset.
         now = datetime.today()
         if self.value() == 'Todays':
-            return queryset.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date', 'time')
+            return queryset.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
         if self.value() == 'Upcoming':
-            return queryset.filter(date__gt=now).order_by('date', 'time')
+            return queryset.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
         if self.value() == 'Recent':
-            return queryset.filter(date__lt=now).order_by('-date', '-time')
+            return queryset.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')
 
 
 class MatchAdmin(SummernoteModelAdmin):
 
-    list_display = ('opponents', 'date', 'series')
+    list_display = ('date', 'opponents', 'status', 'series')
     list_filter = (MatchListFilter,)
     summernote_fields = '__all__'
 

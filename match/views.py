@@ -53,3 +53,15 @@ def series_detail(request, slug):
 	series = Series.objects.get(series_slug=slug)
 
 	return render(request, 'match/series_detail.html', context={'series' : series})
+
+
+
+#ScoreCard AJAX
+from django.http import JsonResponse
+def scorecard(reuest):
+
+	pk = reuest.GET.get('pk', None)
+	match = Match.objects.get(pk=pk)
+	data = [match.team_a, match.team_a_score, match.team_b, match.team_b_score, match.notes]
+
+	return JsonResponse(data, safe=False)

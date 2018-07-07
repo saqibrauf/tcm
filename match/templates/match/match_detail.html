@@ -11,6 +11,14 @@
 	<h1 class="is-marginless">{{ match.opponents }}</h1>
 	<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }}</strong></p>
 
+
+	<h2>Scorecard</h2>
+	<div id="scorecard" class="box">
+		<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
+		<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
+		<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
+	</div>
+
 	<h2 class="is-uppercase is-size-5">Prediction: <span class="has-text-primary">{{ match.prediction }}</span></h2>
 	<h2 class="is-uppercase is-size-5">Winner: <span class="has-text-primary">{{ match.winner }}</span></h2>
 	<hr>
@@ -30,3 +38,38 @@
 	{% endfor %}
 
 {% endblock 'content' %}
+
+{% block 'scripts' %}
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			setInterval(score_refresh, 10000);
+
+			function score_refresh(){
+
+				var pk = {{match.id}};
+
+				$.get({
+					url: '{% url 'scorecard' %}',
+					data: {
+					  'pk': pk
+					},
+					dataType: 'json',
+					success: function (data) {
+						if (data) {
+							$('#TeamA').html(data[0]);
+							$('#TeamAScore').html(data[1]);
+							$('#TeamB').html(data[2]);
+							$('#TeamBScore').html(data[3]);
+							$('#MatchNotes').html(data[4]);
+						}
+					}
+				});
+			}
+
+		});
+	</script>
+
+{% endblock %}
+
