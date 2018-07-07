@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from match.models import Match
+from .models import Match
 import sched, time
 
 class ScoreBoard():
