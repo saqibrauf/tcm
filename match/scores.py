@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from match.models import Match
+import sched, time
 
 class ScoreBoard():
 
@@ -58,3 +59,16 @@ def store_data():
 			m.notes = data[4]
 			
 			m.save()
+
+
+s = sched.scheduler(time.time, time.sleep)
+
+def run_task(sc): 
+    print ("Doing stuff...")
+    store_data()
+    s.enter(10, 1, run_task, (sc,))
+
+s.enter(10, 1, run_task, (s,))
+
+s.run()
+

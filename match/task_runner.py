@@ -1,5 +1,5 @@
 import sched, time
-from . import scores
+from match import scores
 
 s = sched.scheduler(time.time, time.sleep)
 
