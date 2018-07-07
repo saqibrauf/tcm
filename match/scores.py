@@ -39,8 +39,6 @@ def store_data():
 	
 	match = Match.objects.filter(status='live').exclude(score_url__isnull=True).exclude(score_url__exact='')
 
-	qty = match.count()
-
 	if match:
 
 		for m in match:
@@ -58,4 +56,5 @@ def store_data():
 			m.team_b = data[2]
 			m.team_b_score = data[3]
 			m.notes = data[4]
+			
 			m.save()
