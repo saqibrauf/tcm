@@ -1,7 +1,7 @@
 import requests
 import sched, time
 from bs4 import BeautifulSoup
-from match.models import Match
+from models import Match
 
 class ScoreBoard():
 
