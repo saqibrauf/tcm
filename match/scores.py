@@ -25,7 +25,7 @@ class ScoreBoard():
 		if foot_note:
 			comm = foot_note.get_text()
 		else:
-			comm = 'I am lazy in writing. Just wait for a minute. I will update this.'
+			comm = 'I am lazy in writing. Just wait for a minute, I will update this.'
 		
 
 		#CHILD DIVS
