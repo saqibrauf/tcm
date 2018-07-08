@@ -20,8 +20,8 @@ class ScoreBoard():
 		data = soup.find(class_= 'cscore_competitors')
 
 		#Foot Notes
-		comm = soup.find_all(class_='cscore_notes_game')
-		comm = comm[0].get_text()
+		comm = soup.find(class_='cscore_notes_game')
+		comm = comm.get_text()
 
 		#CHILD DIVS
 		teams = data.find_all(class_='cscore_name--long')

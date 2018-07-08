@@ -10,13 +10,16 @@
 	<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
 	<h1 class="is-marginless">{{ match.opponents }}</h1>
 	<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }}</strong></p>
-
-
-	<h2>Scorecard</h2>
+	
 	<div id="scorecard" class="box">
-		<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
-		<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
-		<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
+		<h2>Scorecard</h2>
+		{% if match.status != 'not started' %}
+			<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
+			<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
+			<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
+		{% else %}
+			<p class="is-size-4-desktop">Match is not started yet.</p>
+		{% endif %}
 	</div>
 
 	<h2 class="is-uppercase is-size-5">Prediction: <span class="has-text-primary">{{ match.prediction }}</span></h2>
