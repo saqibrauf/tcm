@@ -16,7 +16,11 @@
 				<h3 class="is-marginless">{{ match.opponents }}</h3>
 				<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 				{% if match.tags.all %}
-					<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
+					<div class="tags is-multiline">
+						{% for t in match.tags.all %}
+							<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+						{% endfor %}
+					</div>
 				{% endif %}
 				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 						<span class="icon">

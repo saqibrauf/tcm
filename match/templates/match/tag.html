@@ -1,20 +1,17 @@
 {% extends 'master.html' %}
 {% load static %}
 
-{% block 'title' %}{% endblock %}
+{% block 'title' %}Get Accurate Match Prediction{% endblock %}
 {% block 'description' %}{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 
-{% block 'content' %}	
-	<h1>{{ series.title }}</h1>
-	<figure class="image is-16by9 is-marginless" style="margin-bottom: 2rem !important;">
-		<img src="{{ series.series_image.url }}">
-	</figure>
-	
-	<h2>Schedule</h2>
-	{% for match in schedule %}
-		<div class="content notification">
+{% block 'content' %}
+
+<h1>{{ tag.tag_name }}</h1>
+
+{% for match in tag_archive %}
+	<div class="content notification">
 			<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 			<h3 class="is-marginless">{{ match.opponents }}</h3>
 			<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
@@ -32,11 +29,8 @@
 				<span>View Prediction</span>
 			</a>
 		</div>
-	{% empty %}
-		<div class="notification is-primary">
-			<p class="is-uppercase">No match is scheduled until now.</p>
-		</div>
-	{% endfor %}
+{% endfor %}
+
 {% endblock 'content' %}
 
 {% block 'sidebar' %}{{block.super}}{% endblock %}

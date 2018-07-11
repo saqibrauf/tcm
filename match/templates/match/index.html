@@ -2,9 +2,9 @@
 
 {% load static %}
 
-{% block 'title' %}Get Accurate Predictions And Betting Tips For All Upcoming And Today's Cricket Matches{% endblock %}
+{% block 'title' %}Accurate Predictions And Betting Tips For All Upcoming And Today's Cricket Matches{% endblock %}
 
-{% block 'description' %}Get accurate predictions and betting tips for all upcoming and today's cricket matches. Get predictions of almost all the One Day Internationals, T20 Internationals, Indian Premier League, Big Bash League, Pakistan Super League, Bangladesh Premier League, Carribbean Premier League, Natwest T20 Blast, Royal London One Day Cup, Karnatka Premier League and Tamil Nadu Premier League.{% endblock %}
+{% block 'description' %}Get predictions of almost all the One Day Internationals, T20 Internationals, Indian Premier League, Big Bash League, Pakistan Super League, Bangladesh Premier League, Carribbean Premier League, Natwest T20 Blast, Royal London One Day Cup, Karnatka Premier League and Tamil Nadu Premier League.{% endblock %}
 
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
@@ -69,14 +69,17 @@
 
 <h2 class="is-marginless">Today's matches</h2>
 <p class="is-uppercase">List of all today's matches.</p>
-<hr>
 {% for match in today_matches %}
-	<div class="content">
+	<div class="content notification">
 		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 		<h3 class="is-marginless">{{ match.opponents }}</h3>
-		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 		{% if match.tags.all %}
-			<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
+			<div class="tags is-multiline">
+				{% for t in match.tags.all %}
+					<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+				{% endfor %}
+			</div>
 		{% endif %}
 		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 			<span class="icon">
@@ -90,19 +93,21 @@
 		<p class="is-uppercase">No match is scheduled today.</p>
 	</div>
 {% endfor %}
-<hr>
 
 <!--UPCOMING MATCHES-->
 <h2 class="is-marginless">Upcoming matches</h2>
 <p class="is-uppercase">List of all upcoming matches.</p>
-<hr>
-{% for match in upcoming_matches %}
-	<div class="content">
+{% for match in upcoming_matches|slice:':10' %}
+	<div class="content notification">
 		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 		<h3 class="is-marginless">{{ match.opponents }}</h3>
-		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 		{% if match.tags.all %}
-			<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
+			<div class="tags is-multiline">
+				{% for t in match.tags.all %}
+					<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+				{% endfor %}
+			</div>
 		{% endif %}
 		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
 			<span class="icon">
@@ -116,7 +121,6 @@
 		<p class="is-uppercase">No match is scheduled in next few days.</p>
 	</div>
 {% endfor %}
-<hr>
 
 <!--Sample code for group by query
 
@@ -148,33 +152,6 @@
 
 
 {% block 'below_content' %}
-
-<section class="hero is-secondary is-hidden">
-	<div class="hero-body has-text-centered">
-		<h2 class="title is-1">Check our stats</h2>
-		<hr>
-		<div class="level is-mobile is-marginless">
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Predicted</p>
-					<p class="title is-2 is-size-4-mobile">{{predicted}}</p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Won</p>
-					<p class="title is-2 is-size-4-mobile">{{won}}</p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Accuracy</p>
-					<p class="title is-2 is-size-4-mobile">{{accuracy}}%</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 
 <div class="hero is-primary">
 	<div class="hero-body">

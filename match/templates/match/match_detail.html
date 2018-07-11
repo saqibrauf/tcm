@@ -10,16 +10,14 @@
 	<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
 	<h1 class="is-marginless">{{ match.opponents }}</h1>
 	<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
-	{% if match.tags.all %}
-		<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
-	{% endif %}
+
 	<div id="scorecard" class="box">
 		<h2>Scorecard</h2>
 		{% if match.status != 'not started' %}
 			<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
 			<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
 			<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
-			<h2 class="is-uppercase">Prediction: <span id="Prediction" class="has-text-primary">{{ match.prediction }}</span></h2>
+			<h2 class="is-uppercase">Prediction:<br><span id="Prediction" class="has-text-primary">{{ match.prediction }}</span></h2>
 		{% else %}
 			<p class="is-size-4-desktop">Match is not started yet.</p>
 		{% endif %}
@@ -27,8 +25,7 @@
 
 	<h2 class="is-uppercase">Live Feed</h2>
 
-	{% for message in messages %}
-		
+	{% for message in messages %}		
 		<div class="content">
 			<p class="is-size-7 is-marginless"><strong>{{ message.date|date:"d/m/Y" }} - {{ message.date|date:"h:i A" }}</strong></p>
 			<div>{{message.message|safe}}</div>
@@ -38,6 +35,12 @@
 			<p>There is no message for this match.</p>
 		</div>
 	{% endfor %}
+
+	<div class="tags is-multiline">
+		{% for t in match.tags.all %}
+			<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+		{% endfor %}
+	</div>
 
 {% endblock 'content' %}
 

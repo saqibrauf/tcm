@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from .models import Match, Series
+from .models import Match, Series, Tag
 
 class MatchSitemap(Sitemap):    
     changefreq = "daily"
@@ -21,3 +21,10 @@ class SeriesSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.date
+
+class TagSitemap(Sitemap):    
+    changefreq = "daily"
+    priority = 1.0
+
+    def items(self):
+        return Tag.objects.all()

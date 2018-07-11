@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Series, Match, Message
+from .models import Series, Match, Message, Tag
 
 
 def index(request):
@@ -54,6 +54,13 @@ def series_detail(request, slug):
 	schedule = series.match_set.all().order_by('date')
 
 	return render(request, 'match/series_detail.html', context={'series' : series, 'schedule' : schedule})
+
+
+def tag_detail(request, slug):
+	tag = Tag.objects.get(slug=slug)
+	tag_archive = Tag.objects.get(slug=slug).match_set.all()
+
+	return render(request, 'match/tag.html', context={'tag' : tag, 'tag_archive' : tag_archive})
 
 
 

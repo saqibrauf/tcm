@@ -25,17 +25,26 @@ class ScoreBoard():
 		if foot_note:
 			comm = foot_note.get_text()
 		else:
-			comm = 'I am lazy in writing. Just wait for a minute, I will update this.'
+			comm = 'Not Updated'
 		
 
 		#CHILD DIVS
 		teams = data.find_all(class_='cscore_name--long')
 		runs = data.find_all(class_='cscore_score')
 
-		t1 = teams[0].get_text()
-		t2 = teams[1].get_text()
-		s1 = runs[0].get_text()
-		s2 = runs[1].get_text()
+		if teams:
+			t1 = teams[0].get_text()
+			t2 = teams[1].get_text()
+		else:
+			t1 = 'Not Updated'
+			t2 = 'Not Updated'
+
+		if runs:
+			s1 = runs[0].get_text()
+			s2 = runs[1].get_text()
+		else:
+			s1 = 'Not Updated'
+			s2 = 'Not Updated'
 
 		list = (t1, s1, t2, s2, comm)
 

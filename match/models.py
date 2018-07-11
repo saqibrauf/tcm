@@ -36,6 +36,9 @@ class Tag(models.Model):
 	def __str__(self):
 		return self.tag_name.upper()
 
+	def get_absolute_url(self):
+		return reverse('tag_detail', args=[str(self.slug)])
+
 	def save(self, *args, **kwargs):
 		self.tag_name = self.tag_name.lower()
 		self.slug = slugify(self.tag_name)
