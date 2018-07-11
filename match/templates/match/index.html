@@ -14,44 +14,48 @@
 	<div class="hero-body is-paddingless">
         <div class="columns is-desktop is-paddingless is-marginless">
 
-        	{%for series in latest_series|slice:':1'%}
-	        	<div class="column is-9-desktop is-paddingless is-marginless banner-bg" style="position: relative; background-image: url('{{series.series_image.url}}');">            	
-		            <div class="is-flex" style="width: 100%; height: 100%; align-items: flex-end;">		            	
-		            	<section class="section" style="background-color: #000000b3; flex-grow: 1; padding: 1.5rem;">
-		            		<h2 class="has-text-primary is-marginless">Latest series</h2>
-		            		<p class="heading is-marginless is-uppercase">Start date: {{series.date|date:"d/m/Y"}}</p>
-		            		<h3 class="has-text-white is-marginless">{{series.title}}</h3>
-		            		<p>{{series.summary}}</p>
-		            		<p><a class="button is-secondary is-outlined is-radiusless" href="{% url 'series_detail' series.series_slug %}">View Schedule</a></p>
-		            	</section>
-		            </div>
-	            </div>
-	        {%empty%}
-	        	<div class="column is-9-desktop is-paddingless is-marginless banner-bg" style="position: relative; background-image: url('{% static 'images/fallback.jpeg' %}');">            	
-		            <div class="is-flex" style="width: 100%; height: 100%; align-items: flex-end;">		            	
-		            	<section class="section" style="background-color: #000000b3; flex-grow: 1; padding: 1.5rem;">
-		            		<p class="title is-marginless is-uppercase">No series in the record</p>
-		            	</section>
-		            </div>
-	            </div>
-        	{%endfor%}
+        	<div class="column is-9-desktop is-paddingless is-marginless banner-bg">  
+        		<figure class="image is-16by9 is-marginless is-hidden-desktop">
+        			<img src="{% static 'images/today-cricket-matches.jpeg' %}" alt="Today Cricket Matches">
+        		</figure>
+		    </div>        	
 
             <div class="column is-3-desktop is-paddingless is-marginless">
             	<section class="section">
-            		<p class="heading is-size-5">Get accurate predictions and betting tips for all upcoming and today's cricket matches</p>
-            		<p>Get predictions of almost all the One Day Internationals, T20 Internationals and all the major domestic cricket leagues around the world.</p>
-
-            		{% for match in latest_match|slice:':1' %}
-	            		<h2 class="has-text-primary">Next match</h2>
-	            		<p class="heading is-uppercase is-marginless">Date: {{match.date|date:"d/m/Y - h:i A"}}</p>
-	            		<h3 class="is-marginless has-text-white">{{match.opponents}}</h3>
-	            		<p class="heading"><a href="{% url 'series_detail' match.series.series_slug %}">{{match.series.title}}</a></p>
-	            		<p><a class="button is-secondary is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">View Detail</a></p>
-            		{% endfor %}
-
+            		<h2 class="title is-size-3 has-text-grey-lighter">Get accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
+            		<p class="has-text-grey-light">We cover almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong>, <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Vitlity T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong>, <strong>Tamil Nadu Premier League</strong> and many more...</p>
             	</section>
-            </div>            
+            </div>
+
         </div>
+	</div>
+</section>
+
+<section class="hero is-light bg-light">
+	<div class="hero-body">
+		<div class="container">
+			<div class="columns is-desktop is-vcentered">
+				<div class="column is-8-desktop">
+					{% for match in latest_match|slice:':1' %}
+						<h2 class="is-size-1 is-marginless has-text-primary">Next upcoming match</h2>
+						<hr class="has-background-dark">
+		        		<p class="heading is-size-5 is-uppercase is-marginless">Date: {{match.date|date:"d/m/Y - h:i A"}}</p>
+		        		<h3 class="is-size-2 is-marginless">{{match.opponents}}</h3>
+		        		<p class="heading is-size-5"><a href="{% url 'series_detail' match.series.series_slug %}">{{match.series.title}}</a></p>
+		        		<p><a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">View Match Detail</a></p>
+		        		<hr class="has-background-dark">
+		    		{% endfor %}
+		    		<p class="heading is-size-5">Download the app and get the accurate match predictions and ball-by-ball score on your android phone.</p>
+		    		<a class="button is-primary is-large" href="#">Download Android App</a>
+				</div>
+				<div class="column is-4-desktop">
+					<figure class="image app-image">
+						<img src="{% static 'images/frame-cs.png' %}">
+					</figure>					
+				</div>
+			</div>
+			
+		</div>
 	</div>
 </section>
 
@@ -59,150 +63,85 @@
 
 {% block 'content' %}
 
+<p class="is-size-4">We don't focus to cover every match. Instead, our focus is to maintain accuracy and provide accurate predictions. We intend to cover those matches for which we have complete data access.</p>
+
 <!--TODAYS MATCHES-->
 
-<div class="card">
-	<div class="card-header">
-		<div class="card-header-title">
-			<div class="card-header-icon">
-				<p class="icon is-large">
-					<i class="far fa-3x fa-play-circle"></i>
-				</p>
-			</div>
-
-			<div>
-				<h2 class="is-marginless has-text-primary">Today's matches</h2>
-				<p class="is-uppercase">List of all today's matches.</p>
-			</div>
-		</div>
+<h2 class="is-marginless">Today's matches</h2>
+<p class="is-uppercase">List of all today's matches.</p>
+<hr>
+{% for match in today_matches %}
+	<div class="content">
+		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		<h3 class="is-marginless">{{ match.opponents }}</h3>
+		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		{% if match.tags.all %}
+			<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
+		{% endif %}
+		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+			<span class="icon">
+				<i class="far fa-play-circle"></i>
+			</span>
+			<span>View Prediction</span>
+		</a>
 	</div>
-	<div class="card-content">
-		<div class="content">
-			{% for match in today_matches %}
-				<div class="content">
-					<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-					<h3 class="is-marginless">{{ match.opponents }}</h3>
-					<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
-					<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-						<span class="icon">
-							<i class="far fa-play-circle"></i>
-						</span>
-						<span>View Prediction</span>
-					</a>
-				</div>
-			{% empty %}
-				<div class="notification is-primary">
-					<p class="is-uppercase">No match is scheduled today.</p>
-				</div>
-			{% endfor %}
-		</div>
+{% empty %}
+	<div class="notification is-primary">
+		<p class="is-uppercase">No match is scheduled today.</p>
 	</div>
-</div>
+{% endfor %}
+<hr>
 
 <!--UPCOMING MATCHES-->
-
-<div class="card">
-	<div class="card-header">
-		<div class="card-header-title">
-			<div class="card-header-icon">
-				<p class="icon is-large">
-					<i class="far fa-3x fa-calendar-alt"></i>
-				</p>
-			</div>
-
-			<div>
-				<h2 class="is-marginless has-text-primary">Upcoming matches</h2>
-				<p class="is-uppercase">List of all upcoming matches.</p>
-			</div>
-		</div>
+<h2 class="is-marginless">Upcoming matches</h2>
+<p class="is-uppercase">List of all upcoming matches.</p>
+<hr>
+{% for match in upcoming_matches %}
+	<div class="content">
+		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		<h3 class="is-marginless">{{ match.opponents }}</h3>
+		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		{% if match.tags.all %}
+			<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
+		{% endif %}
+		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+			<span class="icon">
+				<i class="far fa-play-circle"></i>
+			</span>
+			<span>View Prediction</span>
+		</a>
 	</div>
-	<div class="card-content">
-		<div class="content">
-			{% for match in upcoming_matches|slice:':20' %}
-				<div class="content">
-					<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-					<h3 class="is-marginless">{{ match.opponents }}</h3>
-					<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
-					<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-							<span class="icon">
-								<i class="far fa-play-circle"></i>
-							</span>
-						<span>View Prediction</span>
-					</a>
-				</div>
-			{% empty %}
-				<div class="notification is-primary">
-					<p class="is-uppercase">No match is scheduled.</p>
-				</div>
-			{% endfor %}
-
-		</div>
+{% empty %}
+	<div class="notification is-primary">
+		<p class="is-uppercase">No match is scheduled in next few days.</p>
 	</div>
-</div>
+{% endfor %}
+<hr>
 
-<!-- RECENT MATCHES -->
+<!--Sample code for group by query
 
-<div class="card">
-	<div class="card-header">
-		<div class="card-header-title">
-			<div class="card-header-icon">
-				<p class="icon is-large">
-					<i class="far fa-3x fa-calendar-check"></i>
-				</p>
-			</div>
-
-			<div>
-				<h2 class="is-marginless has-text-primary">Recent matches</h2>
-				<p class="is-uppercase">List of recent matches.</p>
-			</div>
-		</div>
+{% regroup recent_matches|slice:':5' by date|date:"d/m/Y" as matches_by_day %}			
+{% for date in matches_by_day %}
+	<h2 class="">{{ date.grouper }}</h2>
+    <div class="box">
+        {% for match in date.list %}
+	        <div class="content">
+	        	<p class="heading is-marginless">Start Time: {{ match.date|date:"h:i A" }}</p>
+				<h3 class="is-marginless">{{ match.opponents }}</h3>
+				<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
+				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+					<span class="icon">
+						<i class="far fa-play-circle"></i>
+					</span>
+					<span>View Prediction</span>
+				</a>
+	        </div>
+        {% endfor %}
 	</div>
-	<div class="card-content">
-		<div class="content">
-			
-			<!--
-			{% regroup recent_matches by date|date:"d/m/Y" as matches_by_day %}			
-			{% for date in matches_by_day %}
-				<h2 class="">{{ date.grouper }}</h2>
-			    <div class="box">
-			        {% for match in date.list %}
-				        <div class="content">
-				        	<p class="heading is-marginless">Start Time: {{ match.date|date:"h:i A" }}</p>
-							<h3 class="is-marginless">{{ match.opponents }}</h3>
-							<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
-							<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-								<span class="icon">
-									<i class="far fa-play-circle"></i>
-								</span>
-								<span>View Prediction</span>
-							</a>
-				        </div>
-			        {% endfor %}
-				</div>
-			{% endfor %}-->
+{% endfor %}
 
+-->
 
-			{% for match in recent_matches|slice:':20' %}
-				<div class="content">
-					<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-					<h3 class="is-marginless">{{ match.opponents }}</h3>
-					<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
-					<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-							<span class="icon">
-								<i class="far fa-play-circle"></i>
-							</span>
-						<span>View Prediction</span>
-					</a>
-				</div>
-			{% empty %}
-				<div class="notification is-primary">
-					<p class="is-uppercase">No record found.</p>
-				</div>
-			{% endfor %}
-
-		</div>
-	</div>
-</div>
 
 {% endblock 'content' %}
 
@@ -236,6 +175,7 @@
 		</div>
 	</div>
 </section>
+
 <div class="hero is-primary">
 	<div class="hero-body">
 		<div class="container content">
@@ -261,15 +201,15 @@
 {% block 'sidebar' %}
 	
 	{% if all_series %}
-		<h2 class="has-text-primary">All series</h2>
+		<h2>All series</h2>
 		{% for series in all_series|slice:':5' %}
 			<figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
 			</figure>
-			<p class="heading is-marginless has-text-white">Start date: {{series.date|date:"d/m/Y"}}</p>
-			<h3 class="is-marginless has-text-white">{{series.title}}</h3>
-			<p class="has-text-white">{{series.summary}}</p>
-			<p><a class="button is-secondary is-outlined is-radiusless" href="{% url 'series_detail' series.series_slug %}">View Detail</a></p>
+			<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
+			<h3 class="is-marginless">{{series.title}}</h3>
+			<p>{{series.summary}}</p>
+			<p><a class="button is-black is-outlined is-radiusless" href="{% url 'series_detail' series.series_slug %}">View Detail</a></p>
 		{% endfor %}
 	{% endif %}
 

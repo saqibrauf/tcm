@@ -33,6 +33,9 @@ class Tag(models.Model):
 	tag_name = models.CharField(max_length=50)
 	slug = models.SlugField(max_length=50, editable=False)
 
+	def __str__(self):
+		return self.tag_name.upper()
+
 	def save(self, *args, **kwargs):
 		self.tag_name = self.tag_name.lower()
 		self.slug = slugify(self.tag_name)
@@ -53,6 +56,7 @@ class Match(models.Model):
 		('completed', 'Completed'),
 	)
 	status = models.CharField(max_length=12, choices=M_STATUS, default='not started')
+	tags = models.ManyToManyField(Tag, blank=True)
 	team_a = models.CharField(max_length=50, blank=True)
 	team_a_score = models.CharField(max_length=50, blank=True)
 	team_b = models.CharField(max_length=50, blank=True)

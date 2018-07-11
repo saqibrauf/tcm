@@ -1,37 +1,39 @@
 {% load static %}
 
-<nav class="navbar is-fixed-top is-secondary has-shadow">
-    <div class="container is-fluid">
-        <div class="navbar-brand">
-            <a class="navbar-item has-background-primary" href="{% url 'index' %}">
-                <div class="columns is-mobile is-vcentered is-paddingless is-marginless">
-                    <div class="column is-narrow is-marginless is-paddingless">
-                        <figure class="image is-48x48 is-marginless">
-                            <img src="{% static 'images/cricket-ball.png' %}" alt="Today Cricket Matches">
-                        </figure>
-                    </div>
-                    <div class="column is-marginless">
-                        {% url 'index' as home_url %}
-                        {% if request.get_full_path == home_url %}
-                            <h1 class="title has-text-light is-marginless is-4 is-uppercase">Today Cricket Matches</h1>
-                        {% else %}
-                            <p class="title has-text-light is-marginless is-4 is-uppercase">Today Cricket Matches</p>
-                        {% endif %}
+<div class="hero is-primary">
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="{% url 'index' %}">
+                        <div class="columns is-mobile is-vcentered is-paddingless is-marginless">
+                            <div class="column is-narrow is-marginless is-paddingless">
+                                <figure class="image is-48x48 is-marginless">
+                                    <img src="{% static 'images/cricket.png' %}" alt="Today Cricket Matches">
+                                </figure>
+                            </div>
+                            <div class="column is-marginless">
+                                {% url 'index' as home_url %}
+                                {% if request.get_full_path == home_url %}
+                                    <h1 class="title is-marginless is-4 is-uppercase">Today Cricket Matches</h1>
+                                {% else %}
+                                    <p class="title is-marginless is-4 is-uppercase">Today Cricket Matches</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                    <div class="navbar-burger burger" data-target="navMain">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
-
-            </a>
-            <div class="navbar-burger burger" data-target="navMain">
-                <span></span>
-                <span></span>
-                <span></span>
+                <div id="navMain" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a class="navbar-item is-uppercase has-text-weight-bold" href="{% url 'upcoming_matches' %}">Upcoming matches</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="navMain" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item is-uppercase has-text-weight-bold" href="{% url 'upcoming_matches' %}">Upcoming matches</a>
-            </div>
-        </div>
+        </nav>
     </div>
-
-</nav>
+</div>

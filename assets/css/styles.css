@@ -21,21 +21,23 @@ body {
 }
 
 html {
-	max-width: 1600px;
-	margin: 0 auto;
 	word-wrap: break-word;
 	word-break: break-word;
 }
 
 .banner-bg {
-	background-image: url('../images/tcm-bg.jpeg');
+	background-image: url('../images/today-cricket-matches.jpeg');
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 
-.hero.is-black a.navbar-item:hover {
-    background-color: transparent;
+.bg-light {
+	background-image: url('../images/bg-light-1.png');
+}
+
+.navbar {
+    box-shadow: none;
 }
 
 .card {
@@ -58,10 +60,20 @@ html {
 		margin-right: 2rem;
 	}
 
+	main {
+		padding: 3rem 1.5rem 3rem 0 !important;
+	}
+
+	aside {
+		padding: 3rem 0 3rem 1.5rem !important;
+	}
+
+	/*.app-image {
+		transform: rotate(-20deg);
+	}*/
+
 }
 
 @media screen and (max-width: 1088px) {
-	.navbar-brand {
-		background-color: #55be58 !important;
-	}
+
 }

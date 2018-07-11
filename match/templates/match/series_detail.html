@@ -7,6 +7,29 @@
 
 
 {% block 'content' %}	
+	<figure class="image is-16by9 is-marginless">
+		<img src="{{ series.series_image.url }}">
+	</figure>
 	<h1>{{ series.title }}</h1>
-
+	{% for match in schedule %}
+		<div class="content">
+			<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+			<h3 class="is-marginless">{{ match.opponents }}</h3>
+			{% if match.tags.all %}
+				<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
+			{% endif %}
+			<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
+				<span class="icon">
+					<i class="far fa-play-circle"></i>
+				</span>
+				<span>View Prediction</span>
+			</a>
+		</div>
+	{% empty %}
+		<div class="notification is-primary">
+			<p class="is-uppercase">No match is scheduled until now.</p>
+		</div>
+	{% endfor %}
 {% endblock 'content' %}
+
+{% block 'sidebar' %}{{block.super}}{% endblock %}

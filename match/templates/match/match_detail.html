@@ -9,24 +9,23 @@
 {% block 'content' %}	
 	<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
 	<h1 class="is-marginless">{{ match.opponents }}</h1>
-	<p class="subtitle is-6 is-uppercase"><strong>{{ match.series.title }}</strong></p>
-	
+	<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+	{% if match.tags.all %}
+		<div class="tags is-multiline">{% for t in match.tags.all %}<span class="tag is-light is-capitalized">{{ t.tag_name }}</span>{% endfor %}</div>
+	{% endif %}
 	<div id="scorecard" class="box">
 		<h2>Scorecard</h2>
 		{% if match.status != 'not started' %}
 			<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
 			<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
 			<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
+			<h2 class="is-uppercase">Prediction: <span id="Prediction" class="has-text-primary">{{ match.prediction }}</span></h2>
 		{% else %}
 			<p class="is-size-4-desktop">Match is not started yet.</p>
 		{% endif %}
 	</div>
 
-	<h2 class="is-uppercase is-size-5">Prediction: <span class="has-text-primary">{{ match.prediction }}</span></h2>
-	<h2 class="is-uppercase is-size-5">Winner: <span class="has-text-primary">{{ match.winner }}</span></h2>
-	<hr>
-
-	<h2 class="is-uppercase is-size-5"><span class="icon has-text-primary"><i class="far fa-comment"></i></span> Live Feed</h2>
+	<h2 class="is-uppercase">Live Feed</h2>
 
 	{% for message in messages %}
 		
@@ -41,6 +40,8 @@
 	{% endfor %}
 
 {% endblock 'content' %}
+
+{% block 'sidebar' %}{{block.super}}{% endblock %}
 
 {% block 'scripts' %}
 
@@ -66,6 +67,7 @@
 							$('#TeamB').html(data[2]);
 							$('#TeamBScore').html(data[3]);
 							$('#MatchNotes').html(data[4]);
+							$('#Prediction').html(data[5]);
 						}
 					}
 				});

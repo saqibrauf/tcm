@@ -51,8 +51,9 @@ def upcoming_matches(request):
 
 def series_detail(request, slug):
 	series = Series.objects.get(series_slug=slug)
+	schedule = series.match_set.all().order_by('date')
 
-	return render(request, 'match/series_detail.html', context={'series' : series})
+	return render(request, 'match/series_detail.html', context={'series' : series, 'schedule' : schedule})
 
 
 
@@ -62,6 +63,6 @@ def scorecard(reuest):
 
 	pk = reuest.GET.get('pk', None)
 	match = Match.objects.get(pk=pk)
-	data = [match.team_a, match.team_a_score, match.team_b, match.team_b_score, match.notes]
+	data = [match.team_a, match.team_a_score, match.team_b, match.team_b_score, match.notes, match.prediction]
 
 	return JsonResponse(data, safe=False)

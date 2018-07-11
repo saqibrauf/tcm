@@ -2,7 +2,7 @@ from datetime import datetime
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Series, Match, Message
+from .models import Series, Match, Message, Tag
 
 
 #SETTINGS FOR SERIES MODEL###########################
@@ -85,3 +85,5 @@ class MatchAdmin(SummernoteModelAdmin):
     ]
 
 admin.site.register(Match, MatchAdmin)
+
+admin.site.register(Tag)

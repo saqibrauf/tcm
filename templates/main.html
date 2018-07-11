@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html class="has-background-light">
+<html class="has-navbar-fixed-top">
 
 <head>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
     </script>
 </head>
 
-<body class="content has-background-white">
+<body class="content">
 
 
 {% include 'navbar.html' %}
@@ -32,26 +32,19 @@
 <header>{% block 'above_content' %}{% endblock %}</header>
 
 <section class="hero">
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns is-desktop">
-                <div class="column is-8-desktop">
-                    <main>
-                        {% block 'content' %}{% endblock %}
-                    </main>
-                </div>
-                <div class="column is-4-desktop">
-                    <aside>
-                        {% block 'sidebar' %}
-                            <figure class="image app-image">
-                                <img src="{% static 'images/frame-cs.png' %}">
-                            </figure>   
-                        {% endblock %}
-                    </aside>
-                </div>     
+    <div class="hero-body is-paddingless">
+        <div class="columns is-desktop is-paddingless is-marginless">
+            <div class="column is-8-desktop is-paddingless is-marginless">
+                <main class="section">
+                    {% block 'content' %}{% endblock %}
+                </main>
             </div>
+            <div class="column is-4-desktop is-paddingless is-marginless has-background-light">
+                <aside class="section">
+                    {% block 'sidebar' %}{% endblock %}
+                </aside>
+            </div>            
         </div>
-        
     </div>
 </section>
 
