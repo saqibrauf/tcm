@@ -1,7 +1,7 @@
 {% extends 'match/app_pages/master.html' %}
 
 {% block 'content' %}
-	<div class="section" style="font-size: 75%;">
+	<div class="section">
 		<div class="container content">
 			<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
 			<h1 class="is-marginless">{{ match.opponents }}</h1>
@@ -12,7 +12,7 @@
 					<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
 					<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
 					<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
-					<h2 class="is-uppercase"><span id="Prediction" class="has-text-primary">{{ match.prediction }}</span></h2>
+					<h2 id="Prediction" class="is-uppercase">{{ match.prediction }}</h2>
 				{% else %}
 					<p class="is-size-4-desktop">Match is not started yet.</p>
 				{% endif %}

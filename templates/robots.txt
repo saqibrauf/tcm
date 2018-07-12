@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:/app/
+Disallow:/admin/
+Sitemap: http://www.todaycricketmatches.com/sitemap.xml

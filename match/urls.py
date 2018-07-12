@@ -2,6 +2,7 @@
 from django.urls import path, re_path
 from . import views
 from django.contrib.sitemaps import views as sm_views
+from django.views.generic import TemplateView
 from .sitemaps import MatchSitemap, SeriesSitemap, TagSitemap
 
 sitemaps = {
@@ -25,6 +26,7 @@ urlpatterns = [
     path('app/', views.app_index, name='app_index' ),
     path('app/upcoming', views.app_upcoming, name='app_upcoming' ),
     path('app/match/<slug>/', views.app_match, name='app_match' ),
+    path('robots.txt/', TemplateView.as_view(template_name='robots.txt'), name="robot"),
 
     #scorecard
     path('scorecard/', views.scorecard, name='scorecard' ),
