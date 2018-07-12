@@ -22,6 +22,9 @@ urlpatterns = [
     path('predictions/<slug>/', views.match_detail, name='match_detail' ),
     path('series/<slug>/', views.series_detail, name='series_detail' ),
     path('tag/<slug>/', views.tag_detail, name='tag_detail' ),
+    path('app/', views.app_index, name='app_index' ),
+    path('app/upcoming', views.app_upcoming, name='app_upcoming' ),
+    path('app/match/<slug>/', views.app_match, name='app_match' ),
 
     #scorecard
     path('scorecard/', views.scorecard, name='scorecard' ),

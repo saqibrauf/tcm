@@ -1,0 +1,70 @@
+{% extends 'match/app_pages/master.html' %}
+
+{% block 'content' %}
+	<div class="section" style="font-size: 75%;">
+		<div class="container content">
+			<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
+			<h1 class="is-marginless">{{ match.opponents }}</h1>
+			<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
+
+			<div id="scorecard" class="notification">
+				{% if match.status != 'not started' %}
+					<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
+					<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
+					<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
+					<h2 class="is-uppercase"><span id="Prediction" class="has-text-primary">{{ match.prediction }}</span></h2>
+				{% else %}
+					<p class="is-size-4-desktop">Match is not started yet.</p>
+				{% endif %}
+			</div>
+
+			{% for message in messages %}		
+				<div class="content">
+					<p class="is-size-7 is-marginless"><strong>{{ message.date|date:"d/m/Y" }} - {{ message.date|date:"h:i A" }}</strong></p>
+					<div>{{message.message|safe}}</div>
+				</div>
+				{% empty %}
+				<div class="notification">				
+					<p>There is no message for this match.</p>
+				</div>
+			{% endfor %}
+			
+		</div>
+	</div>	
+
+{% endblock 'content' %}
+
+{% block 'scripts' %}
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			setInterval(score_refresh, 10000);
+
+			function score_refresh(){
+
+				var pk = {{match.id}};
+
+				$.get({
+					url: '{% url 'scorecard' %}',
+					data: {
+					  'pk': pk
+					},
+					dataType: 'json',
+					success: function (data) {
+						if (data) {
+							$('#TeamA').html(data[0]);
+							$('#TeamAScore').html(data[1]);
+							$('#TeamB').html(data[2]);
+							$('#TeamBScore').html(data[3]);
+							$('#MatchNotes').html(data[4]);
+							$('#Prediction').html(data[5]);
+						}
+					}
+				});
+			}
+
+		});
+	</script>
+
+{% endblock %}

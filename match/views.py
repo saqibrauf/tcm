@@ -73,3 +73,22 @@ def scorecard(reuest):
 	data = [match.team_a, match.team_a_score, match.team_b, match.team_b_score, match.notes, match.prediction]
 
 	return JsonResponse(data, safe=False)
+
+
+#APP PAGES
+
+def app_index(request):
+	now = timezone.now()
+	today_matches = today_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
+	return render(request, 'match/app_pages/index.html', context={'today_matches':today_matches})
+
+def app_upcoming(request):
+	now = timezone.now()
+	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
+	return render(request, 'match/app_pages/upcoming.html', context={'upcoming_matches':upcoming_matches})
+
+def app_match(request, slug):
+	match = Match.objects.get(slug=slug)
+	messages = match.message_set.all()
+	return render(request, 'match/app_pages/match.html', context={'match':match, 'messages':messages})
+	

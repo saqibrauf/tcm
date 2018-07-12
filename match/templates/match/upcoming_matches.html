@@ -11,7 +11,7 @@
 <p>We don't focus to cover every match. Instead, our focus is to maintain accuracy and provide accurate predictions. We intend to cover those matches for which we have complete data access.</p>
 <hr>
 {% for match in upcoming_matches %}	
-	<div class="content">
+	<div class="content notification">
 				<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 				<h3 class="is-marginless">{{ match.opponents }}</h3>
 				<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
