@@ -40,9 +40,8 @@
 						<h2 class="is-size-1 is-marginless has-text-primary">Next upcoming match</h2>
 						<hr class="has-background-dark">
 		        		<p class="heading is-size-5 is-uppercase is-marginless">Date: {{match.date|date:"d/m/Y - h:i A"}}</p>
-		        		<h3 class="is-size-2 is-marginless">{{match.opponents}}</h3>
+		        		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-size-2 is-marginless">{{match.opponents}}</h3></a>
 		        		<p class="heading is-size-5"><a href="{% url 'series_detail' match.series.series_slug %}">{{match.series.title}}</a></p>
-		        		<p><a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">View Match Detail</a></p>
 		        		<hr class="has-background-dark">
 		    		{% endfor %}
 		    		<p class="heading is-size-5">Download the app and get the accurate match predictions and ball-by-ball score on your android phone.</p>
@@ -72,7 +71,7 @@
 {% for match in today_matches %}
 	<div class="content notification">
 		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-		<h3 class="is-marginless">{{ match.opponents }}</h3>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
 		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 		{% if match.tags.all %}
 			<div class="tags is-multiline">
@@ -81,12 +80,6 @@
 				{% endfor %}
 			</div>
 		{% endif %}
-		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-			<span class="icon">
-				<i class="far fa-play-circle"></i>
-			</span>
-			<span>View Prediction</span>
-		</a>
 	</div>
 {% empty %}
 	<div class="notification is-primary">
@@ -100,7 +93,7 @@
 {% for match in upcoming_matches|slice:':10' %}
 	<div class="content notification">
 		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-		<h3 class="is-marginless">{{ match.opponents }}</h3>
+		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
 		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 		{% if match.tags.all %}
 			<div class="tags is-multiline">
@@ -109,12 +102,6 @@
 				{% endfor %}
 			</div>
 		{% endif %}
-		<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-			<span class="icon">
-				<i class="far fa-play-circle"></i>
-			</span>
-			<span>View Prediction</span>
-		</a>
 	</div>
 {% empty %}
 	<div class="notification is-primary">
@@ -123,7 +110,6 @@
 {% endfor %}
 
 <!--Sample code for group by query
-
 {% regroup recent_matches|slice:':5' by date|date:"d/m/Y" as matches_by_day %}			
 {% for date in matches_by_day %}
 	<h2 class="">{{ date.grouper }}</h2>
@@ -143,9 +129,7 @@
         {% endfor %}
 	</div>
 {% endfor %}
-
 -->
-
 
 {% endblock 'content' %}
 
@@ -178,15 +162,14 @@
 {% block 'sidebar' %}
 	
 	{% if all_series %}
-		<h2>All series</h2>
+		<h2>Recent cricket series</h2>
 		{% for series in all_series|slice:':5' %}
 			<figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
 			</figure>
 			<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
-			<h3 class="is-marginless">{{series.title}}</h3>
+			<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless">{{series.title}}</h3></a>
 			<p>{{series.summary}}</p>
-			<p><a class="button is-black is-outlined is-radiusless" href="{% url 'series_detail' series.series_slug %}">View Detail</a></p>
 		{% endfor %}
 	{% endif %}
 

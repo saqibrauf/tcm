@@ -29,8 +29,10 @@ class ScoreBoard():
 		
 
 		#CHILD DIVS
-		teams = data.find_all(class_='cscore_name--long')
-		runs = data.find_all(class_='cscore_score')
+		if data.find_all(class_='cscore_name--long'):
+			teams = data.find_all(class_='cscore_name--long')
+		if data.find_all(class_='cscore_score'):
+			runs = data.find_all(class_='cscore_score')
 
 		if teams:
 			t1 = teams[0].get_text()

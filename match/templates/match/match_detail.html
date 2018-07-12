@@ -1,8 +1,8 @@
 {% extends 'master.html' %}
 {% load static %}
 
-{% block 'title' %}Who Will Win {{ match.opponents|title }} - Get Accurate Match Prediction{% endblock %}
-{% block 'description' %}Get accurate match prediction and betting tips for {{ match.opponents }}. See full schedule of {{ match.series.title }}.{% endblock %}
+{% block 'title' %}{{ match.opponents|title }} - Get Accurate Match Prediction{% endblock %}
+{% block 'description' %}Get accurate match prediction, betting tips and live scorecard for {{ match.opponents|title }}. See full schedule of {{ match.series.title|title }}.{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 
