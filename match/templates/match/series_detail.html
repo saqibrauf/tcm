@@ -14,14 +14,15 @@
 	
 	<h2>Schedule</h2>
 	{% for match in schedule %}
-		<div class="content notification">
+		<div class="content box is-radiusless">
 			<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 			<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
 			<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
+			<hr>
 			{% if match.tags.all %}
 				<div class="tags is-multiline">
 					{% for t in match.tags.all %}
-						<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+						<a class="tag is-light is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 					{% endfor %}
 				</div>
 			{% endif %}

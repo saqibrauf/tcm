@@ -37,12 +37,18 @@
 		</div>
 	{% endfor %}
 
-	<div class="tags is-multiline">
-		{% for t in match.tags.all %}
-			<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
-		{% endfor %}
+	<div class="content box is-radiusless">			
+		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
+		<p>We do not use astrology or any kind of bullshit, else we use state of the art, data driven approach to fetch out the outcome of the match with highest possible success ratio.</p>
+		<hr>
+		{% if match.tags.all %}
+			<div class="tags is-multiline">
+				{% for t in match.tags.all %}
+					<a class="tag is-light is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+				{% endfor %}
+			</div>
+		{% endif %}
 	</div>
-
 {% endblock 'content' %}
 
 {% block 'sidebar' %}{{block.super}}{% endblock %}

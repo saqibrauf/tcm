@@ -180,5 +180,14 @@
 			<p>{{series.summary}}</p>
 		{% endfor %}
 	{% endif %}
+	<hr>
+	{% if tag_cloud %}
+		<h2>Tag Cloud</h2>
+		<div class="tags is-multiline">
+			{% for t in tag_cloud %}
+				<a class="tag is-primary is-medium is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+			{% endfor %}
+		</div>
+	{% endif %}
 
 {% endblock %}

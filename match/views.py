@@ -11,21 +11,18 @@ def index(request):
 	
 	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
 
-	recent_matches = Match.objects.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')
-
 	all_series = Series.objects.order_by('-date')
 
-	latest_series = Series.objects.order_by('-date')
-
 	latest_match = Match.objects.filter(date__gt=now).order_by('date')
+
+	tag_cloud = Tag.objects.all()
 
 	context = {
 		'today_matches' : today_matches,
 		'upcoming_matches' : upcoming_matches,
-		'recent_matches' : recent_matches,		
 		'all_series' : all_series,
-		'latest_series' : latest_series,
 		'latest_match' : latest_match,
+		'tag_cloud' : tag_cloud,
 	}
 
 	return render(request, 'match/index.html', context)
