@@ -5,7 +5,7 @@ from .models import Series, Match, Message, Tag
 
 
 def index(request):
-	now = timezone.now()
+	now = timezone.localtime(timezone.now())
 
 	today_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')	
 	
@@ -40,7 +40,7 @@ def match_detail(request, slug):
 
 
 def upcoming_matches(request):
-	now = timezone.now()
+	now = timezone.localtime(timezone.now())
 	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date')
 
 	return render(request, 'match/upcoming_matches.html', context={'upcoming_matches' : upcoming_matches})
@@ -75,12 +75,12 @@ def scorecard(reuest):
 #APP PAGES
 
 def app_index(request):
-	now = timezone.now()
+	now = timezone.localtime(timezone.now())
 	today_matches = today_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
 	return render(request, 'match/app_pages/index.html', context={'today_matches':today_matches})
 
 def app_upcoming(request):
-	now = timezone.now()
+	now = timezone.localtime(timezone.now())
 	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
 	return render(request, 'match/app_pages/upcoming.html', context={'upcoming_matches':upcoming_matches})
 
