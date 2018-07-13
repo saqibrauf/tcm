@@ -3,6 +3,7 @@
 
 {% block 'title' %}{{ match.opponents|title }} - Get Accurate Match Prediction{% endblock %}
 {% block 'description' %}Get accurate match prediction, betting tips and live scorecard for {{ match.opponents|title }}. See full schedule of {{ match.series.title|title }}.{% endblock %}
+{% block 'news' %}{{ match.opponents|title }} Latest Update{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
 
@@ -17,7 +18,7 @@
 			<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
 			<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
 			<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
-			<h2 class="is-uppercase">Prediction:<br><span id="Prediction" class="has-text-primary">{{ match.prediction }}</span></h2>
+			<h2 id="Prediction" class="is-uppercase">{{ match.prediction }}</h2>
 		{% else %}
 			<p class="is-size-4-desktop">Match is not started yet.</p>
 		{% endif %}

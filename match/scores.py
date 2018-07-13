@@ -19,34 +19,36 @@ class ScoreBoard():
 		#Main DIV
 		data = soup.find(class_= 'cscore_competitors')
 
-		#Foot Notes
-		foot_note = soup.find(class_='cscore_notes_game')
-
-		if foot_note:
+		#Foot Notes		
+		try:
+			foot_note = soup.find(class_='cscore_notes_game')
 			comm = foot_note.get_text()
-		else:
-			comm = 'Not Updated'
+		except:
+			comm = 'Not updated'
+			print ('Commentry not found...')
+			pass
 		
-
-		#CHILD DIVS
-		if data.find_all(class_='cscore_name--long'):
+		#Names
+		try:
 			teams = data.find_all(class_='cscore_name--long')
-		if data.find_all(class_='cscore_score'):
-			runs = data.find_all(class_='cscore_score')
-
-		if teams:
 			t1 = teams[0].get_text()
 			t2 = teams[1].get_text()
-		else:
+		except:
 			t1 = 'Not Updated'
 			t2 = 'Not Updated'
+			print ('Teams not found...')
+			pass
 
-		if runs:
+		#Score
+		try:
+			runs = data.find_all(class_='cscore_score')
 			s1 = runs[0].get_text()
 			s2 = runs[1].get_text()
-		else:
+		except:
 			s1 = 'Not Updated'
 			s2 = 'Not Updated'
+			print ('Scores not found...')
+			pass
 
 		list = (t1, s1, t2, s2, comm)
 

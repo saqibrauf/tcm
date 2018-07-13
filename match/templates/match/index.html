@@ -69,14 +69,18 @@
 <h2 class="is-marginless">Today's matches</h2>
 <p class="is-uppercase">List of all today's matches.</p>
 {% for match in today_matches %}
-	<div class="content notification">
+	<div class="content box is-radiusless">		
 		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
 		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		<hr>
+		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
+		<p>We do not use astrology or any kind of bullshit, else we use state of the art, data driven approach to fetch out the outcome of the match with highest possible success ratio.</p>
+		<hr>
 		{% if match.tags.all %}
 			<div class="tags is-multiline">
 				{% for t in match.tags.all %}
-					<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+					<a class="tag is-light is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 				{% endfor %}
 			</div>
 		{% endif %}
@@ -91,14 +95,18 @@
 <h2 class="is-marginless">Upcoming matches</h2>
 <p class="is-uppercase">List of all upcoming matches.</p>
 {% for match in upcoming_matches|slice:':10' %}
-	<div class="content notification">
+	<div class="content box is-radiusless">
 		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
 		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		<hr>
+		<p>Get accurate prediction and live scorecard of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
+		<p>We do not use astrology or any kind of bullshit, else we use state of the art, data driven approach to fetch out the outcome of the match with highest possible success ratio.</p>
+		<hr>
 		{% if match.tags.all %}
 			<div class="tags is-multiline">
 				{% for t in match.tags.all %}
-					<a class="tag is-primary is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+					<a class="tag is-light is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 				{% endfor %}
 			</div>
 		{% endif %}

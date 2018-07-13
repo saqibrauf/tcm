@@ -13,7 +13,7 @@
 {% for match in upcoming_matches %}	
 	<div class="content notification">
 				<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-				<h3 class="is-marginless">{{ match.opponents }}</h3>
+				<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
 				<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 				{% if match.tags.all %}
 					<div class="tags is-multiline">
@@ -22,12 +22,6 @@
 						{% endfor %}
 					</div>
 				{% endif %}
-				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-						<span class="icon">
-							<i class="far fa-play-circle"></i>
-						</span>
-					<span>View Prediction</span>
-				</a>
 			</div>
 {% empty %}			
 	<div class="notification is-primary">
