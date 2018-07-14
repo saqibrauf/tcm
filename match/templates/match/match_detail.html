@@ -12,7 +12,7 @@
 	<h1 class="is-marginless">{{ match.opponents }}</h1>
 	<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 
-	<div id="scorecard" class="box">
+	<div id="scorecard" class="box is-radiusless">
 		<h2>Scorecard</h2>
 		{% if match.status != 'not started' %}
 			<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
@@ -39,7 +39,7 @@
 
 	<div class="content box is-radiusless">			
 		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
-		<p>We do not use astrology or any kind of bullshit, else we use state of the art, data driven approach to fetch out the outcome of the match with highest possible success ratio.</p>
+		<p><strong>We do not use astrology</strong> or any kind of bullshit, else we use state of the art, data driven approach to fetch out the possible winner of the match with highest possible success ratio.</p>
 		<hr>
 		{% if match.tags.all %}
 			<div class="tags is-multiline">

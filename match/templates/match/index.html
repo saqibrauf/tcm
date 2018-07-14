@@ -75,7 +75,7 @@
 		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 		<hr>
 		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
-		<p>We do not use astrology or any kind of bullshit, else we use state of the art, data driven approach to fetch out the outcome of the match with highest possible success ratio.</p>
+		<p><strong>We do not use astrology</strong> or any kind of bullshit, else we use state of the art, data driven approach to fetch out the possible winner of the match with highest possible success ratio.</p>
 		<hr>
 		{% if match.tags.all %}
 			<div class="tags is-multiline">
@@ -100,8 +100,8 @@
 		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
 		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 		<hr>
-		<p>Get accurate prediction and live scorecard of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
-		<p>We do not use astrology or any kind of bullshit, else we use state of the art, data driven approach to fetch out the outcome of the match with highest possible success ratio.</p>
+		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
+		<p><strong>We do not use astrology</strong> or any kind of bullshit, else we use state of the art, data driven approach to fetch out the possible winner of the match with highest possible success ratio.</p>
 		<hr>
 		{% if match.tags.all %}
 			<div class="tags is-multiline">
@@ -163,6 +163,7 @@
 		</div>
 	</div>
 </div>
+
 {% endblock %}
 
 
@@ -171,21 +172,22 @@
 	
 	{% if all_series %}
 		<h2>Recent cricket series</h2>
+		<hr>
 		{% for series in all_series|slice:':5' %}
-			<figure class="image is-16by9 is-marginless" style="margin-bottom: 1rem !important;">
+			<figure class="image is-16by9 is-marginless is-hidden" style="margin-bottom: 1rem !important;">
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
 			</figure>
 			<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
 			<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless">{{series.title}}</h3></a>
 			<p>{{series.summary}}</p>
+			<hr>
 		{% endfor %}
 	{% endif %}
-	<hr>
 	{% if tag_cloud %}
 		<h2>Tag Cloud</h2>
 		<div class="tags is-multiline">
 			{% for t in tag_cloud %}
-				<a class="tag is-primary is-medium is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+				<a class="tag is-light is-medium is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 			{% endfor %}
 		</div>
 	{% endif %}
