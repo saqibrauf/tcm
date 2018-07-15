@@ -63,14 +63,12 @@ def tag_detail(request, slug):
 
 #ScoreCard AJAX
 from django.http import JsonResponse
-def scorecard(reuest):
-
-	pk = reuest.GET.get('pk', None)
+def scorecard(request):
+	pk = request.GET.get('pk', None)
 	match = Match.objects.get(pk=pk)
 	data = [match.team_a, match.team_a_score, match.team_b, match.team_b_score, match.notes, match.prediction]
 
 	return JsonResponse(data, safe=False)
-
 
 #APP PAGES
 
