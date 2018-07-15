@@ -8,14 +8,8 @@
 		{% for match in today_matches %}
 			<div class="content notification">
 				<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-				<h3 class="is-marginless">{{ match.opponents }}</h3>
-				<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
-				<a class="button is-dark is-outlined is-radiusless" href="{% url 'app_match' match.slug %}">
-					<span class="icon">
-						<i class="far fa-play-circle"></i>
-					</span>
-					<span>View Prediction</span>
-				</a>
+				<a href="{% url 'app_match' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
+				<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
 			</div>
 		{% empty %}
 			<div class="hero">
