@@ -74,10 +74,51 @@ class MatchListFilter(admin.SimpleListFilter):
             return queryset.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')
 
 
+#Filter Matches By Status
+class MatchStatusFilter(admin.SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _('Match Status')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'status'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return (
+            ('Live', _('Live Matches')),
+            ('NotStarted', _('Not Started')),
+            ('Completed', _('Completed Matches')),
+        )
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        # Compare the requested value (either '80s' or '90s')
+        # to decide how to filter the queryset.
+        
+        if self.value() == 'Live':
+            return queryset.filter(status='live').order_by('date')
+        if self.value() == 'NotStarted':
+            return queryset.filter(status='not started').order_by('date')
+        if self.value() == 'Completed':
+            return queryset.filter(status='completed').order_by('-date')
+
+
+
 class MatchAdmin(SummernoteModelAdmin):
 
     list_display = ('date', 'opponents', 'status', 'series')
-    list_filter = (MatchListFilter,)
+    list_filter = (MatchListFilter, MatchStatusFilter)
     summernote_fields = '__all__'
 
     inlines = [
