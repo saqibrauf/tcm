@@ -78,11 +78,17 @@ def store_data():
 			
 			m.save()
 
+		print ('Storing Data...')
+
+	else:
+
+		print('No Live Match.....')
+
 
 s = sched.scheduler(time.time, time.sleep)
 
 def run_task(sc): 
-    print ("Doing stuff...")
+	
     store_data()
     s.enter(10, 1, run_task, (sc,))
 
