@@ -114,13 +114,6 @@
 			<h3 class="is-marginless is-size-4"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
 			<p class="is-uppercase is-size-7"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 			<p class="is-size-7">{{match.notes}}</p>
-			{% if match.tags.all %}
-				<div class="buttons is-multiline">
-					{% for t in match.tags.all %}
-						<a class="button is-small is-black is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
-					{% endfor %}
-				</div>
-			{% endif %}
 		</div>
 	{% empty %}
 	<div class="notification is-primary is-radiusless">
