@@ -33,4 +33,44 @@
 	{% endfor %}
 {% endblock 'content' %}
 
-{% block 'sidebar' %}{{block.super}}{% endblock %}
+{% block 'sidebar' %}
+	
+	{% if latest_series %}
+		<h2>Recent series</h2>
+		{% for series in latest_series|slice:':5' %}
+			<figure class="image is-16by9 is-marginless">
+				<img src="{{series.series_image.url}}" alt="{{series.title}}">
+			</figure>
+			<div class="notification is-radiusless">
+				<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
+				<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless is-size-4">{{series.title}}</h3></a>
+				<p>{{series.summary}}</p>
+			</div>
+		{% endfor %}
+		<hr>
+	{% endif %}
+
+	<h2>Recent matches</h2>
+	{% for match in recent_matches|slice:':10' %}
+		<p class="heading is-size-7 is-marginless notification is-marginless is-primary is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+			<div class="content notification is-light is-radiusless">
+				<h3 class="is-marginless is-size-4"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+				<p class="is-uppercase is-size-7"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+				<p class="is-size-7">{{match.notes}}</p>
+			</div>
+		{% empty %}
+		<div class="notification is-primary is-radiusless">
+			<p class="is-uppercase">No record found.</p>
+		</div>
+	{% endfor %}
+	
+	{% if tag_cloud %}
+		<h2>Tag cloud</h2>
+		<div class="buttons is-multiline">
+			{% for t in tag_cloud %}
+				<a class="button is-small is-primary is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+			{% endfor %}
+		</div>
+	{% endif %}
+
+{% endblock %}

@@ -5,8 +5,8 @@
 {% block 'description' %}Get accurate predictions and betting tips for all upcoming and today's cricket matches. Get predictions of almost all the One Day Internationals, T20 Internationals, Indian Premier League, Big Bash League, Pakistan Super League, Bangladesh Premier League, Carribbean Premier League, Natwest T20 Blast, Royal London One Day Cup, Karnatka Premier League and Tamil Nadu Premier League.{% endblock %}
 
 {% block 'content' %}
-<section class="notification is-light is-radiusless">
-	<h1 class="is-marginless">List of all recent matches</h1>
+<section class="notification is-primary is-radiusless">
+	<h1 class="is-marginless has-text-white">List of all recent matches</h1>
 	<p class="heading is-size-5">List of all recent matches being played in the past days.</p>
 </section>
 <hr>
@@ -30,5 +30,46 @@
 		<p class="is-uppercase">No match is scheduled in next few days.</p>
 	</div>
 {% endfor %}
+
+{% endblock %}
+
+{% block 'sidebar' %}
+	
+	{% if latest_series %}
+		<h2>Recent series</h2>
+		{% for series in latest_series|slice:':5' %}
+			<figure class="image is-16by9 is-marginless">
+				<img src="{{series.series_image.url}}" alt="{{series.title}}">
+			</figure>
+			<div class="notification is-radiusless">
+				<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
+				<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless is-size-4">{{series.title}}</h3></a>
+				<p>{{series.summary}}</p>
+			</div>
+		{% endfor %}
+		<hr>
+	{% endif %}
+
+	<h2>Upcoming matches</h2>
+	{% for match in upcoming_matches|slice:':10' %}
+		<p class="heading is-size-7 is-marginless notification is-marginless is-primary is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+			<div class="content notification is-light is-radiusless">
+				<h3 class="is-marginless is-size-4"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+				<p class="is-uppercase is-size-7"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+			</div>
+		{% empty %}
+		<div class="notification is-primary is-radiusless">
+			<p class="is-uppercase">No record found.</p>
+		</div>
+	{% endfor %}
+	
+	{% if tag_cloud %}
+		<h2>Tag cloud</h2>
+		<div class="buttons is-multiline">
+			{% for t in tag_cloud %}
+				<a class="button is-small is-primary is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+			{% endfor %}
+		</div>
+	{% endif %}
 
 {% endblock %}
