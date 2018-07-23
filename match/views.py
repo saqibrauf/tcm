@@ -11,17 +11,17 @@ def index(request):
 	
 	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
 
-	all_series = Series.objects.order_by('-date')
+	recent_matches = Match.objects.filter(date__lt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('-date')
 
-	latest_match = Match.objects.filter(date__gt=now).order_by('date')
+	latest_series = Series.objects.order_by('-date')
 
 	tag_cloud = Tag.objects.all()
 
 	context = {
 		'today_matches' : today_matches,
 		'upcoming_matches' : upcoming_matches,
-		'all_series' : all_series,
-		'latest_match' : latest_match,
+		'recent_matches' : recent_matches,
+		'latest_series' : latest_series,
 		'tag_cloud' : tag_cloud,
 	}
 
@@ -44,6 +44,12 @@ def upcoming_matches(request):
 	upcoming_matches = Match.objects.filter(date__gt=now).order_by('date')
 
 	return render(request, 'match/upcoming_matches.html', context={'upcoming_matches' : upcoming_matches})
+
+def recent_matches(request):
+	now = timezone.localtime(timezone.now())
+	recent_matches = Match.objects.filter(date__lt=now).order_by('-date')
+
+	return render(request, 'match/recent_matches.html', context={'recent_matches' : recent_matches})
 
 
 def series_detail(request, slug):

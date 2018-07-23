@@ -12,7 +12,7 @@
 .content h6, h6 {
 	font-family: 'Saira Extra Condensed', sans-serif !important;
 	font-weight: 900 !important;
-	text-transform: uppercase !important;
+	text-transform: capitalize !important;
 }
 
 body {
@@ -23,6 +23,10 @@ body {
 html {
 	word-wrap: break-word;
 	word-break: break-word;
+}
+
+#content {
+	padding: 3rem 0rem;
 }
 
 .banner-bg {
@@ -55,25 +59,17 @@ html {
 		font-size: 16px;
 	}
 
-	.container.is-fluid {
-		margin-left: 1rem;
-		margin-right: 2rem;
-	}
-
 	main {
-		padding: 3rem 1.5rem 3rem 0 !important;
+		padding: 0 3rem 0 0;
 	}
-
-	aside {
-		padding: 3rem 0 3rem 1.5rem !important;
-	}
-
-	/*.app-image {
-		transform: rotate(-20deg);
-	}*/
 
 }
 
 @media screen and (max-width: 1088px) {
-
+	#content {
+		padding: 3rem 1rem;
+	}
+	aside {
+		padding-top: 3rem;
+	}
 }

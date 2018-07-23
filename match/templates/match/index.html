@@ -8,140 +8,62 @@
 
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
 
-{% block 'above_content' %}
-
-<section class="hero is-black">
-	<div class="hero-body is-paddingless">
-        <div class="columns is-desktop is-paddingless is-marginless">
-
-        	<div class="column is-9-desktop is-paddingless is-marginless banner-bg">  
-        		<figure class="image is-16by9 is-marginless is-hidden-desktop">
-        			<img src="{% static 'images/today-cricket-matches.jpeg' %}" alt="Today Cricket Matches">
-        		</figure>
-		    </div>        	
-
-            <div class="column is-3-desktop is-paddingless is-marginless">
-            	<section class="section">
-            		<h2 class="title is-size-3 has-text-grey-lighter">Get accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
-            		<p class="has-text-grey-light">We cover almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong>, <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Vitlity T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong>, <strong>Tamil Nadu Premier League</strong> and many more...</p>
-            	</section>
-            </div>
-
-        </div>
-	</div>
-</section>
-
-<section class="hero is-light bg-light">
-	<div class="hero-body">
-		<div class="container">
-			<div class="columns is-desktop is-vcentered">
-				<div class="column is-8-desktop">
-					{% for match in latest_match|slice:':1' %}
-						<h2 class="is-size-1 is-marginless has-text-primary">Next upcoming match</h2>
-						<hr class="has-background-dark">
-		        		<p class="heading is-size-5 is-uppercase is-marginless">Date: {{match.date|date:"d/m/Y - h:i A"}}</p>
-		        		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-size-2 is-marginless">{{match.opponents}}</h3></a>
-		        		<p class="heading is-size-5"><a href="{% url 'series_detail' match.series.series_slug %}">{{match.series.title}}</a></p>
-		        		<hr class="has-background-dark">
-		    		{% endfor %}
-		    		<p class="heading is-size-5">Download the app and get the accurate match predictions and ball-by-ball score on your android phone.</p>
-		    		<a class="button is-primary is-large" href="/static/downloads/tcm.apk">Download Android App</a>
-				</div>
-				<div class="column is-4-desktop">
-					<figure class="image app-image">
-						<img src="{% static 'images/frame-tcm.png' %}">
-					</figure>					
-				</div>
-			</div>
-			
-		</div>
-	</div>
-</section>
-
-{% endblock 'above_content' %}
-
 {% block 'content' %}
 
-<p class="is-size-4">We don't focus to cover every match. Instead, our focus is to maintain accuracy and provide accurate predictions. We intend to cover those matches for which we have complete data access.</p>
+<section class="notification is-light is-radiusless">
+	<h2 class="title is-3">Get Live Score, Match odds, accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
+	<p class="is-size-6">We cover almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong>, <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Vitlity T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong>, <strong>Tamil Nadu Premier League</strong> and many more...</p>
+	<p>We don't focus to cover every match. Instead, our focus is to maintain accuracy and provide accurate predictions. We intend to cover those matches for which we have complete data access.</p>
+</section>
 
-<!--TODAYS MATCHES-->
+<hr><h2>Today's matches</h2><hr>
 
-<h2 class="is-marginless">Today's matches</h2>
-<p class="is-uppercase">List of all today's matches.</p>
-{% for match in today_matches %}
-	<div class="content box is-radiusless">		
-		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
-		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
-		<hr>
-		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
-		<p><strong>We do not use astrology</strong> or any kind of bullshit, else we use state of the art, data driven approach to fetch out the possible winner of the match with highest possible success ratio.</p>
-		<hr>
+{% for match in today_matches|slice:':5' %}
+	<p class="heading is-size-5 is-marginless notification is-marginless is-primary is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+	<div class="content notification is-light is-radiusless">
+		<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 		{% if match.tags.all %}
-			<div class="tags is-multiline">
+			<div class="buttons is-multiline">
 				{% for t in match.tags.all %}
-					<a class="tag is-light is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+					<a class="button is-small is-black is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 				{% endfor %}
 			</div>
 		{% endif %}
 	</div>
 {% empty %}
-	<div class="notification is-primary">
-		<p class="is-uppercase">No match is scheduled today.</p>
-	</div>
-{% endfor %}
-
-<!--UPCOMING MATCHES-->
-<h2 class="is-marginless">Upcoming matches</h2>
-<p class="is-uppercase">List of all upcoming matches.</p>
-{% for match in upcoming_matches|slice:':10' %}
-	<div class="content box is-radiusless">
-		<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-		<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
-		<p class="is-uppercase"><a class="has-text-grey-light" href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
-		<hr>
-		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
-		<p><strong>We do not use astrology</strong> or any kind of bullshit, else we use state of the art, data driven approach to fetch out the possible winner of the match with highest possible success ratio.</p>
-		<hr>
-		{% if match.tags.all %}
-			<div class="tags is-multiline">
-				{% for t in match.tags.all %}
-					<a class="tag is-light is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
-				{% endfor %}
-			</div>
-		{% endif %}
-	</div>
-{% empty %}
-	<div class="notification is-primary">
+	<div class="notification is-primary is-radiusless">
 		<p class="is-uppercase">No match is scheduled in next few days.</p>
 	</div>
 {% endfor %}
 
-<!--Sample code for group by query
-{% regroup recent_matches|slice:':5' by date|date:"d/m/Y" as matches_by_day %}			
-{% for date in matches_by_day %}
-	<h2 class="">{{ date.grouper }}</h2>
-    <div class="box">
-        {% for match in date.list %}
-	        <div class="content">
-	        	<p class="heading is-marginless">Start Time: {{ match.date|date:"h:i A" }}</p>
-				<h3 class="is-marginless">{{ match.opponents }}</h3>
-				<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
-				<a class="button is-dark is-outlined is-radiusless" href="{% url 'match_detail' match.slug %}">
-					<span class="icon">
-						<i class="far fa-play-circle"></i>
-					</span>
-					<span>View Prediction</span>
-				</a>
-	        </div>
-        {% endfor %}
+<hr><h2>Upcoming matches</h2><hr>
+
+{% for match in upcoming_matches|slice:':20' %}
+
+	<p class="heading is-size-5 is-marginless notification is-marginless is-grey is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+	<div class="content notification is-light is-radiusless">
+		<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		{% if match.tags.all %}
+			<div class="buttons is-multiline">
+				{% for t in match.tags.all %}
+					<a class="button is-small is-black is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+{% empty %}
+	<div class="notification is-primary is-radiusless">
+		<p class="is-uppercase">No match is scheduled in next few days.</p>
 	</div>
 {% endfor %}
--->
+{% if upcoming_matches|length > 20 %}
+	<a class="button is-grey is-large is-radiusless is-capitalized" href="{% url 'upcoming_matches' %}">View full list</a>
+{% endif %}
+
 
 {% endblock 'content' %}
-
-
 
 {% block 'below_content' %}
 
@@ -170,24 +92,46 @@
 
 {% block 'sidebar' %}
 	
-	{% if all_series %}
-		<h2>Recent cricket series</h2>
-		<hr>
-		{% for series in all_series|slice:':5' %}
-			<figure class="image is-16by9 is-marginless is-hidden" style="margin-bottom: 1rem !important;">
+	{% if latest_series %}
+		<h2>Recent series</h2>
+		{% for series in latest_series|slice:':5' %}
+			<figure class="image is-16by9 is-marginless">
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
 			</figure>
-			<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
-			<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless">{{series.title}}</h3></a>
-			<p>{{series.summary}}</p>
-			<hr>
+			<div class="notification is-radiusless">
+				<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
+				<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless is-size-4">{{series.title}}</h3></a>
+				<p>{{series.summary}}</p>
+			</div>
 		{% endfor %}
+		<hr>
 	{% endif %}
+
+	<h2>Recent matches</h2>
+	{% for match in recent_matches|slice:':10' %}
+		<p class="heading is-size-7 is-marginless notification is-marginless is-primary is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		<div class="content notification is-light is-radiusless">
+			<h3 class="is-marginless is-size-4"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+			<p class="is-uppercase is-size-7"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+			<p class="is-size-7">{{match.notes}}</p>
+			{% if match.tags.all %}
+				<div class="buttons is-multiline">
+					{% for t in match.tags.all %}
+						<a class="button is-small is-black is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+	{% empty %}
+	<div class="notification is-primary is-radiusless">
+		<p class="is-uppercase">No record found.</p>
+	</div>
+{% endfor %}
 	{% if tag_cloud %}
-		<h2>Tag Cloud</h2>
-		<div class="tags is-multiline">
+		<h2>Tag cloud</h2>
+		<div class="buttons is-multiline">
 			{% for t in tag_cloud %}
-				<a class="tag is-light is-medium is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+				<a class="button is-small is-primary is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 			{% endfor %}
 		</div>
 	{% endif %}

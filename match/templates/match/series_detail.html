@@ -7,22 +7,21 @@
 
 
 {% block 'content' %}	
-	<h1>{{ series.title }}</h1>
+	
 	<figure class="image is-16by9 is-marginless" style="margin-bottom: 2rem !important;">
 		<img src="{{ series.series_image.url }}">
 	</figure>
-	
-	<h2>Schedule</h2>
+	<h1>{{ series.title }}</h1><hr>
 	{% for match in schedule %}
-		<div class="content box is-radiusless">
-			<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-			<a href="{% url 'match_detail' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
-			<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
-			<hr>
+		<p class="heading is-size-5 is-marginless notification is-marginless is-grey is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		<div class="content notification is-light is-radiusless">
+			<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+			<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+			<p>{{ match.notes }}</p>
 			{% if match.tags.all %}
-				<div class="tags is-multiline">
+				<div class="buttons is-multiline">
 					{% for t in match.tags.all %}
-						<a class="tag is-light is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+						<a class="button is-small is-black is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 					{% endfor %}
 				</div>
 			{% endif %}

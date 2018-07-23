@@ -6,16 +6,17 @@
 
 {% block 'content' %}
 <section class="notification is-light is-radiusless">
-	<h1 class="is-marginless">List of all upcoming matches</h1>
-	<p class="heading is-size-5">Schedule of all upcoming matches coming your way in the next days.</p>
+	<h1 class="is-marginless">List of all recent matches</h1>
+	<p class="heading is-size-5">List of all recent matches being played in the past days.</p>
 </section>
 <hr>
-{% for match in upcoming_matches %}
+{% for match in recent_matches %}
 
 	<p class="heading is-size-5 is-marginless notification is-marginless is-grey is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 	<div class="content notification is-light is-radiusless">
 		<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
 		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		<p>{{ match.notes }}</p>
 		{% if match.tags.all %}
 			<div class="buttons is-multiline">
 				{% for t in match.tags.all %}

@@ -20,6 +20,7 @@ urlpatterns = [
     #Website Views
     path('', views.index, name='index' ),    
     path('upcoming-matches/', views.upcoming_matches, name='upcoming_matches'),
+    path('recent-matches/', views.recent_matches, name='recent_matches'),
     path('predictions/<slug>/', views.match_detail, name='match_detail' ),
     path('series/<slug>/', views.series_detail, name='series_detail' ),
     path('tag/<slug>/', views.tag_detail, name='tag_detail' ),
