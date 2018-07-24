@@ -33,6 +33,8 @@
 {% endblock %}
 
 {% block 'sidebar' %}
+
+	{{block.super}}
 	
 	{% if latest_series %}
 		<h2>Recent series</h2>

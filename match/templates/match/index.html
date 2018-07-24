@@ -92,6 +92,8 @@
 
 {% block 'sidebar' %}
 	
+	{{block.super}}
+	
 	{% if latest_series %}
 		<h2>Recent series</h2>
 		{% for series in latest_series|slice:':5' %}

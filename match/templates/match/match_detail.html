@@ -12,15 +12,7 @@
 		<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
 		<h1 class="is-marginless has-text-white">{{ match.opponents }}</h1>
 		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
-	</div>
-	<div class="notification is-light is-radiusless">
-		<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
-		<p><strong>We do not use astrology</strong> or any kind of bullshit, else we use state of the art, data driven approach to fetch out the possible winner of the match with highest possible success ratio.</p>
-	</div>
-	
-
-	
-	<h2 class="notification is-dark is-radiusless is-marginless">Scorecard</h2>
+	</div>	
 	<div id="scorecard" class="notification is-light is-radiusless">
 		{% if match.status != 'not started' %}
 			<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
@@ -49,9 +41,13 @@
 	
 	{% if match.tags.all %}
 		<div class="notification is-radiusless">
+
+			<p>Get <strong>accurate match prediction</strong> and <strong>live scorecard</strong> of <strong>{{ match.opponents|title }}</strong>. We provide predictions based on data analysis and betting trends around over the world.</p>
+			<p><strong>We do not use astrology</strong> or any kind of bullshit, else we use state of the art, data driven approach to fetch out the possible winner of the match with highest possible success ratio.</p>
+	
 			<div class="buttons is-multiline">
 				{% for t in match.tags.all %}
-					<a class="button is-dark is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+					<a class="button is-small is-dark is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
 				{% endfor %}
 			</div>
 		</div>
@@ -77,6 +73,8 @@
 {% endblock 'content' %}
 
 {% block 'sidebar' %}
+	
+	{{block.super}}
 	
 	{% if latest_series %}
 		<h2>Recent series</h2>
