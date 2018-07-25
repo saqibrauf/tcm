@@ -17,8 +17,8 @@
 </section>
 
 {% for match in today_matches|slice:':5' %}
-	<p class="is-marginless notification is-marginless is-primary is-radiusless is-size-7-mobile" style="padding: .5rem 1.5rem;">Today - {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-	<div class="content notification is-light is-radiusless">
+	<p class="is-marginless notification is-marginless is-primary is-radiusless is-size-7-mobile" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+	<div class="content notification is-secondary is-radiusless">
 		<h3 class="is-marginless is-size-4-mobile"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
 		<p class="is-capitalized"><a href="{% url 'series_detail' match.series.series_slug %}">{{ match.series.title }}</a></p>
 		{% if match.tags.all %}

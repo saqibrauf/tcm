@@ -12,7 +12,7 @@
 .content h6, h6 {
 	font-family: 'Saira Extra Condensed', sans-serif !important;
 	font-weight: 600 !important;
-	text-transform: capitalize !important;
+	text-transform: uppercase !important;
 }
 
 body {
