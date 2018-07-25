@@ -10,7 +10,7 @@
     <title>{% block 'title' %}Today Cricket Matches{% endblock %}</title>
     <meta name="news_keywords" content="{% block 'news' %}{% endblock %}">
     <meta name="description" content="{% block 'description' %}{% endblock %}">
-    <link href="https://fonts.googleapis.com/css?family=Play:400,700|Saira+Extra+Condensed:900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700|Saira+Extra+Condensed:600" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="icon" href="{% static 'images/cricket.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
@@ -50,17 +50,20 @@
         <div class="column is-3-desktop is-paddingless is-marginless">
             <aside>
                 {% block 'sidebar' %}
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Sidebar Top -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-7688661235566872"
-                         data-ad-slot="6691715257"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    <div class="is-hidden">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Sidebar Top -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-7688661235566872"
+                             data-ad-slot="6691715257"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        <hr>
+                    </div>                    
                 {% endblock %}
             </aside>
         </div>     

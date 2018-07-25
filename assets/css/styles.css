@@ -11,7 +11,7 @@
 .content h5, h5,
 .content h6, h6 {
 	font-family: 'Saira Extra Condensed', sans-serif !important;
-	font-weight: 900 !important;
+	font-weight: 600 !important;
 	text-transform: capitalize !important;
 }
 
@@ -67,7 +67,7 @@ html {
 
 @media screen and (max-width: 1088px) {
 	#content {
-		padding: 3rem 1rem;
+		padding: 1rem;
 	}
 	aside {
 		padding-top: 3rem;
