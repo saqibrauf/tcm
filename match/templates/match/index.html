@@ -17,9 +17,9 @@
 </section>
 
 {% for match in today_matches|slice:':5' %}
-	<p class="is-marginless notification is-marginless is-primary is-radiusless" style="padding: 1rem 2rem;">Today - {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+	<p class="is-marginless notification is-marginless is-primary is-radiusless is-size-7-mobile" style="padding: 1rem 2rem;">Today - {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 	<div class="content notification is-light is-radiusless">
-		<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+		<h3 class="is-marginless is-size-4-mobile"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
 		<p class="is-capitalized"><a href="{% url 'series_detail' match.series.series_slug %}">{{ match.series.title }}</a></p>
 		{% if match.tags.all %}
 			<div class="buttons is-multiline">
@@ -37,9 +37,9 @@
 
 {% for match in upcoming_matches|slice:':20' %}
 
-	<p class="is-marginless notification is-marginless is-grey is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+	<p class="is-marginless notification is-marginless is-grey is-radiusless is-size-7-mobile" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 	<div class="content notification is-light is-radiusless">
-		<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+		<h3 class="is-marginless is-size-4-mobile"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
 		<p class="is-capitalized"><a href="{% url 'series_detail' match.series.series_slug %}">{{ match.series.title }}</a></p>
 		{% if match.tags.all %}
 			<div class="buttons is-multiline">
@@ -97,7 +97,7 @@
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
 			</figure>
 			<div class="notification is-radiusless">
-				<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless is-size-4">{{series.title}}</h3></a>				
+				<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless is-size-4 is-size-5-mobile">{{series.title}}</h3></a>				
 				<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
 				<p>{{series.summary}}</p>
 			</div>
@@ -108,7 +108,7 @@
 	{% for match in recent_matches|slice:':5' %}
 		<p class="heading is-size-7 is-marginless notification is-marginless is-primary is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 			<div class="content notification is-light is-radiusless">
-				<h3 class="is-marginless is-size-4"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+				<h3 class="is-marginless is-size-4 is-size-5-mobile"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
 				<p class="is-capitalized is-size-7"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 				<p class="is-size-7">{{match.notes}}</p>
 			</div>

@@ -9,9 +9,9 @@
 
 {% block 'content' %}	
 	<div class="notification is-primary is-radiusless is-marginless">
-		<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
-		<h1 class="is-marginless has-text-white">{{ match.opponents }}</h1>
-		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		<p class="is-marginless is-size-7-mobile">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		<h1 class="is-marginless has-text-white is-size-3-mobile">{{ match.opponents }}</h1>
+		<p class="is-uppercase is-size-7-mobile"><a href="{% url 'series_detail' match.series.series_slug %}">{{ match.series.title }}</a></p>
 	</div>	
 	<div id="scorecard" class="notification is-light is-radiusless">
 		{% if match.status != 'not started' %}
@@ -25,8 +25,8 @@
 					<p class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">  <span id="TeamB"><span id="TeamBScore">{{ match.team_b_score }}</span></p>
 				</div>
 			</div>
-			<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
-			<h2 id="Prediction" class="is-uppercase is-marginless">{{ match.prediction }}</h2>
+			<p class="is-uppercase is-size-7-mobile"><span id="MatchNotes">{{ match.notes }}</span></p>
+			<h2 id="Prediction" class="is-uppercase is-marginless is-size-4-mobile">{{ match.prediction }}</h2>
 		{% else %}
 			<p class="is-size-4-desktop">Match is not started yet.</p>
 		{% endif %}
@@ -61,12 +61,12 @@
 	</div>
 	
 
-	<h2>{{match.series.title}}</h2>
+	<h2 class="is-size-3-mobile">{{match.series.title}}</h2>
 	{% for match in schedule|slice:':10' %}
 		<p class="heading is-size-5 is-marginless notification is-marginless is-grey is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 		<div class="content notification is-light is-radiusless">
-			<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
-			<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+			<h3 class="is-marginless is-size-4-mobile"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+			<p class="is-capitalized"><a href="{% url 'series_detail' match.series.series_slug %}">{{ match.series.title }}</a></p>
 			{% if match.tags.all %}
 				<div class="buttons is-multiline">
 					{% for t in match.tags.all %}
@@ -91,7 +91,7 @@
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
 			</figure>
 			<div class="notification is-radiusless">
-				<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless is-size-4">{{series.title}}</h3></a>				
+				<a href="{% url 'series_detail' series.series_slug %}"><h3 class="is-marginless is-size-4 is-size-5-mobile">{{series.title}}</h3></a>				
 				<p class="heading is-marginless">Start date: {{series.date|date:"d/m/Y"}}</p>
 				<p>{{series.summary}}</p>
 			</div>
@@ -102,7 +102,7 @@
 	{% for match in recent_matches|slice:':5' %}
 		<p class="heading is-size-7 is-marginless notification is-marginless is-primary is-radiusless" style="padding: 1rem 2rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 			<div class="content notification is-light is-radiusless">
-				<h3 class="is-marginless is-size-4"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+				<h3 class="is-marginless is-size-4 is-size-5-mobile"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
 				<p class="is-capitalized is-size-7"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
 				<p class="is-size-7">{{match.notes}}</p>
 			</div>
@@ -122,6 +122,7 @@
 	{% endif %}
 
 {% endblock %}
+
 
 {% block 'scripts' %}
 
