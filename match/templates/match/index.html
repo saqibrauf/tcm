@@ -10,12 +10,6 @@
 
 {% block 'content' %}
 
-<section class="box is-light is-radiusless">
-	<h2 class="title is-3">Get Live Score, Match odds, accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
-	<p class="is-size-6">We cover almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong>, <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Vitlity T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong>, <strong>Tamil Nadu Premier League</strong> and many more...</p>
-	<p>We don't focus to cover every match. Instead, our focus is to maintain accuracy and provide accurate predictions. We intend to cover those matches for which we have complete data access.</p>
-</section>
-
 {% for match in today_matches|slice:':5' %}
 	<p class="is-marginless notification is-marginless is-primary is-radiusless is-size-7-mobile" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 	<div class="content notification is-secondary is-radiusless">
@@ -34,6 +28,12 @@
 		<p class="is-uppercase">No match is scheduled today.</p>
 	</div>
 {% endfor %}
+
+<section class="box is-light is-radiusless">
+	<h2 class="title is-3">Get Live Score, Match odds, accurate predictions and betting tips for all upcoming and today's cricket matches</h2>
+	<p class="is-size-6">We cover almost all the <strong>One Day Internationals</strong>, <strong>T20 Internationals</strong>, <strong>Indian Premier League</strong>, <strong>Big Bash League</strong>, <strong>Pakistan Super League</strong>, <strong>Bangladesh Premier League</strong>, <strong>Carribbean Premier League</strong>, <strong>Vitlity T20 Blast</strong>, <strong>Royal London One Day Cup</strong>, <strong>Karnatka Premier League</strong>, <strong>Tamil Nadu Premier League</strong> and many more...</p>
+	<p>We don't focus to cover every match. Instead, our focus is to maintain accuracy and provide accurate predictions. We intend to cover those matches for which we have complete data access.</p>
+</section>
 
 {% for match in upcoming_matches|slice:':20' %}
 
@@ -91,7 +91,7 @@
 	{{block.super}}
 	
 	{% if latest_series %}
-		<h2>Recent series</h2>
+		<h2 class="notification is-secondary is-radiusless">Recent series</h2>
 		{% for series in latest_series|slice:':5' %}
 			<figure class="image is-16by9 is-marginless">
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
@@ -104,7 +104,7 @@
 		{% endfor %}
 	{% endif %}
 
-	<h2>Recent matches</h2>
+	<h2 class="notification is-secondary is-radiusless">Recent matches</h2>
 	{% for match in recent_matches|slice:':5' %}
 		<p class="heading is-size-7 is-marginless notification is-marginless is-primary is-radiusless" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 			<div class="content notification is-light is-radiusless">
@@ -117,14 +117,5 @@
 			<p class="is-uppercase">No record found.</p>
 		</div>
 	{% endfor %}
-	
-	{% if tag_cloud %}
-		<h2>Tag cloud</h2>
-		<div class="buttons is-multiline">
-			{% for t in tag_cloud %}
-				<a class="button is-small is-primary is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
-			{% endfor %}
-		</div>
-	{% endif %}
 
 {% endblock %}

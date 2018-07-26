@@ -72,7 +72,22 @@
     <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-</div>    
+</div>  
+
+<section class="hero is-light">
+    <div class="hero-body">
+        <div class="container is-fluid">
+            {% if tag_cloud %}
+                <h2 class="has-text-centered">Tag cloud</h2>
+                <div class="buttons is-multiline" style="justify-content: center;">
+                    {% for t in tag_cloud %}
+                        <a class="button is-small is-dark is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>  
 
 <footer class="footer has-background-dark">
     <div class="container content has-text-centered">

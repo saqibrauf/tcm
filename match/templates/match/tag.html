@@ -8,13 +8,13 @@
 
 {% block 'content' %}
 
-<h1 class="notification is-primary is-radiusless">{{ tag.tag_name }}</h1><hr>
+<h1 class="notification is-primary is-radiusless">{{ tag.tag_name }}</h1>
 
 {% for match in tag_archive %}
-	<p class="heading is-size-5 is-marginless notification is-marginless is-grey is-radiusless" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+	<p class="heading is-size-5 is-size-7-mobile is-marginless notification is-marginless is-grey is-radiusless" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 	<div class="content notification is-light is-radiusless">
-		<h3 class="is-marginless"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
-		<p class="is-uppercase"><a href="{% url 'series_detail' match.series.series_slug %}"><strong>{{ match.series.title }}</strong></a></p>
+		<h3 class="is-marginless is-size-4-mobile"><a href="{% url 'match_detail' match.slug %}">{{ match.opponents }}</a></h3>
+		<p class="is-capitalized"><a href="{% url 'series_detail' match.series.series_slug %}">{{ match.series.title }}</a></p>
 		<p>{{ match.notes }}</p>
 		{% if match.tags.all %}
 			<div class="buttons is-multiline">
@@ -33,7 +33,7 @@
 	{{block.super}}
 	
 	{% if latest_series %}
-		<h2>Recent series</h2>
+		<h2 class="notification is-secondary is-radiusless">Recent series</h2>
 		{% for series in latest_series|slice:':5' %}
 			<figure class="image is-16by9 is-marginless">
 				<img src="{{series.series_image.url}}" alt="{{series.title}}">
@@ -46,7 +46,7 @@
 		{% endfor %}
 	{% endif %}
 
-	<h2>Recent matches</h2>
+	<h2 class="notification is-secondary is-radiusless">Recent matches</h2>
 	{% for match in recent_matches|slice:':5' %}
 		<p class="heading is-size-7 is-marginless notification is-marginless is-primary is-radiusless" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
 			<div class="content notification is-light is-radiusless">
@@ -59,14 +59,5 @@
 			<p class="is-uppercase">No record found.</p>
 		</div>
 	{% endfor %}
-	
-	{% if tag_cloud %}
-		<h2>Tag cloud</h2>
-		<div class="buttons is-multiline">
-			{% for t in tag_cloud %}
-				<a class="button is-small is-primary is-outlined is-capitalized" href="{% url 'tag_detail' t.slug %}">{{ t.tag_name }}</a>
-			{% endfor %}
-		</div>
-	{% endif %}
 
 {% endblock %}
