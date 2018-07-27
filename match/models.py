@@ -53,6 +53,8 @@ class Match(models.Model):
 	opponents = models.CharField(max_length=255, default='Add Opponents')
 	slug = models.SlugField(max_length=255, default='', editable=False)
 	score_url = models.CharField(max_length=255, blank=True)
+	bookie = models.CharField(max_length=15, blank=True)
+	odds_url = models.CharField(max_length=255, blank=True)
 	M_STATUS = (
 		('not started', 'Not Started'),
 		('live', 'Live'),
@@ -62,8 +64,12 @@ class Match(models.Model):
 	tags = models.ManyToManyField(Tag, blank=True)
 	team_a = models.CharField(max_length=50, blank=True)
 	team_a_score = models.CharField(max_length=50, blank=True)
+	odds_team_a_name = models.CharField(max_length=50, blank=True)
+	team_a_odds = models.CharField(max_length=10, blank=True)
 	team_b = models.CharField(max_length=50, blank=True)
 	team_b_score = models.CharField(max_length=50, blank=True)
+	odds_team_b_name = models.CharField(max_length=50, blank=True)
+	team_b_odds = models.CharField(max_length=10, blank=True)
 	notes = models.CharField(max_length=100, blank=True)
 	prediction = models.CharField(max_length=50, blank=True)
 	winner = models.CharField(max_length=50, blank=True)

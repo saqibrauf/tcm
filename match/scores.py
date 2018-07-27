@@ -4,16 +4,12 @@ from bs4 import BeautifulSoup
 from match.models import Match
 
 class ScoreBoard():
-
 	url = ''
 	
 	def score(self):
-
 		url = self.url
-
 		response = requests.get(url)
 		html = response.content
-
 		soup = BeautifulSoup(html, 'html.parser')
 
 		#Main DIV
@@ -87,8 +83,7 @@ def store_data():
 
 s = sched.scheduler(time.time, time.sleep)
 
-def run_task(sc): 
-	
+def run_task(sc): 	
     store_data()
     s.enter(10, 1, run_task, (sc,))
 

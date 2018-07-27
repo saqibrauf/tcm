@@ -134,7 +134,7 @@ from django.http import JsonResponse
 def scorecard(request):
 	pk = request.GET.get('pk', None)
 	match = Match.objects.get(pk=pk)
-	data = [match.team_a, match.team_a_score, match.team_b, match.team_b_score, match.notes, match.prediction]
+	data = [match.team_a, match.team_a_score, match.team_a_odds, match.team_b, match.team_b_score, match.team_b_odds, match.notes, match.prediction, match.odds_team_a_name, match.odds_team_b_name, match.status]
 
 	return JsonResponse(data, safe=False)
 
