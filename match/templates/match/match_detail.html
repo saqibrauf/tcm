@@ -1,7 +1,7 @@
 {% extends 'master.html' %}
 {% load static %}
 
-{% block 'title' %}{{ match.opponents|title }} - Get Accurate Match Prediction{% endblock %}
+{% block 'title' %}{{ match.opponents|title }} - Accurate Match Prediction{% endblock %}
 {% block 'description' %}Get accurate match prediction, betting tips and live scorecard for {{ match.opponents|title }}. See full schedule of {{ match.series.title|title }}.{% endblock %}
 {% block 'news' %}{{ match.opponents|title }} Latest Update{% endblock %}
 {% block 'canonical' %}<link rel="canonical" href="{{request.build_absolute_uri}}" />{% endblock %}
@@ -15,25 +15,25 @@
 	</div>	
 	
 	<div class="notification is-dark is-radiusless is-marginless">		
-		<div id="Board" class="columns is-mobile is-paddingless">
-			<div class="column">
+		<div id="Board" class="columns is-mobile is-paddingless is-marginless">
+			<div class="column is-narrow">
 				<p id="TeamA" class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">{{ match.team_a }}</p>
 				<p id="TeamB" class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">{{ match.team_b }}</p>
 			</div>
-			<div class="column is-narrow">
+			<div class="column has-text-right">
 				<p class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">  <span id="TeamAScore">{{ match.team_a_score }}</span></p>
 				<p class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">  <span id="TeamB"><span id="TeamBScore">{{ match.team_b_score }}</span></p>
 			</div>
 		</div>	
-		<p id="MatchNotes" class="is-uppercase is-size-7-mobile">{{ match.notes }}</p>		
+		<p id="MatchNotes" class="is-uppercase is-size-7-mobile is-hidden">{{ match.notes }}</p>		
 	</div>
 
 	
-	<div id="Prediction" class="notification is-grey is-radiusless is-marginless">
+	<div id="Prediction" class="notification is-grey is-radiusless is-marginless is-hidden">
 		<h2 class="is-uppercase is-marginless is-size-4-mobile">{{ match.prediction }}</h2>
 	</div>
 	
-	<div id="ODDS" class="notification is-secondary is-radiusless">
+	<div id="ODDS" class="notification is-secondary is-radiusless is-hidden">
 		<div class="columns is-mobile is-paddingless">
 			<div class="column">
 				<p id="OddsTeamA" class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">{{ match.odds_team_a_name }}</p>
@@ -159,11 +159,11 @@
 
 							var notes = data[6];
 							if (notes == 'Not updated') {
-								$('#MatchNotes').hide();
+								$('#MatchNotes').addClass('is-hidden');
 								$('#Board').addClass('is-marginless');
 							} else {
 								$('#Board').removeClass('is-marginless');
-								$('#MatchNotes').show();
+								$('#MatchNotes').removeClass('is-hidden');
 								$('#MatchNotes').html(notes);
 							}
 							
@@ -171,10 +171,10 @@
 							var prediction = data[7];
 							if (prediction) {
 								$('#Prediction').html(prediction);
-								$('#Prediction').show();
+								$('#Prediction').removeClass('is-hidden');
 							} else {
 								
-								$('#Prediction').hide();
+								$('#Prediction').addClass('is-hidden');
 							}
 
 							
@@ -187,6 +187,17 @@
 							} else {
 								$('#ODDS').show();
 							}
+
+							var OddsTA = data[2];
+							var OddsTB = data[5];
+							var OddsTeamA = data[8];
+							var OddsTeamB = data[9];
+							if (OddsTA == '0' && OddsTB == '0' && OddsTeamA == '0' && OddsTeamB == '0') {
+								$('#ODDS').addClass('is-hidden');
+							} else {
+								$('#ODDS').removeClass('is-hidden');
+							}
+
 						}
 					}
 				});
