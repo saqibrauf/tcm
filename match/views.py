@@ -1,13 +1,14 @@
 from django.http import Http404
 from django.shortcuts import render
 from django.utils import timezone
+from django.db.models import Q
 from .models import Series, Match, Message, Tag
 
 
 def index(request):
 	now = timezone.localtime(timezone.now())
 
-	today_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')	
+	today_matches = Match.objects.filter(Q(date__day=now.day, date__month=now.month, date__year=now.year) | Q(status='live')).order_by('date')	
 	
 	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
 
