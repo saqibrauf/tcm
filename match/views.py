@@ -143,8 +143,9 @@ def scorecard(request):
 
 def app_index(request):
 	now = timezone.localtime(timezone.now())
-	today_matches = today_matches = Match.objects.filter(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
-	return render(request, 'match/app_pages/index.html', context={'today_matches':today_matches})
+	today_matches = Match.objects.filter(Q(date__day=now.day, date__month=now.month, date__year=now.year) | Q(status='live')).order_by('date')	
+	upcoming_matches = Match.objects.filter(date__gt=now).exclude(date__day=now.day, date__month=now.month, date__year=now.year).order_by('date')
+	return render(request, 'match/app_pages/index.html', context={'today_matches':today_matches, 'upcoming_matches' : upcoming_matches})
 
 def app_upcoming(request):
 	now = timezone.localtime(timezone.now())
@@ -153,6 +154,5 @@ def app_upcoming(request):
 
 def app_match(request, slug):
 	match = Match.objects.get(slug=slug)
-	messages = match.message_set.all()
-	return render(request, 'match/app_pages/match.html', context={'match':match, 'messages':messages})
+	return render(request, 'match/app_pages/match.html', context={'match':match})
 	

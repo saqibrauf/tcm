@@ -3,22 +3,32 @@
 {% block 'content' %}
 
 <div class="section">
-	<div class="container content">
-		<h1>Today's matches</h1>
-		{% for match in today_matches %}
-			<div class="content notification">
-				<p class="heading is-marginless">Start Date: {{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
-				<a href="{% url 'app_match' match.slug %}"><h3 class="is-marginless">{{ match.opponents }}</h3></a>
-				<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
-			</div>
-		{% empty %}
-			<div class="hero">
-				<div class="hero-body has-text-centered">
-					<h2>No match is scheduled today.</h2>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
+	{% for match in today_matches|slice:':5' %}
+
+		<p class="is-marginless notification is-marginless is-primary is-radiusless is-size-7-mobile" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		<div class="content notification is-secondary is-radiusless">
+			<h3 class="is-marginless is-size-4-mobile"><a href="{% url 'app_match' match.slug %}">{{ match.opponents }}</a></h3>
+			<p class="is-capitalized">{{ match.series.title }}</p>
+		</div>
+	{% empty %}
+		<div class="notification is-primary is-radiusless">
+			<p class="is-uppercase">No match is scheduled today.</p>
+		</div>
+
+	{% endfor %}
+
+	{% for match in upcoming_matches|slice:':10' %}
+
+		<p class="is-marginless notification is-marginless is-grey is-radiusless is-size-7-mobile" style="padding: .5rem 1.5rem;">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		<div class="content notification is-light is-radiusless">
+			<h3 class="is-marginless is-size-4-mobile"><a href="{% url 'app_match' match.slug %}">{{ match.opponents }}</a></h3>
+			<p class="is-capitalized">{{ match.series.title }}</p>
+		</div>
+	{% empty %}
+		<div class="notification is-primary is-radiusless">
+			<p class="is-uppercase">No match is scheduled in next few days.</p>
+		</div>
+	{% endfor %}
 </div>
 
 {% endblock %}

@@ -1,36 +1,43 @@
 {% extends 'match/app_pages/master.html' %}
 
 {% block 'content' %}
-	<div class="section">
-		<div class="container content">
-			<p class="is-marginless"><strong>{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</strong></p>
-			<h1 class="is-marginless">{{ match.opponents }}</h1>
-			<p class="is-uppercase"><strong>{{ match.series.title }}</strong></p>
-
-			<div id="scorecard" class="notification">
-				{% if match.status != 'not started' %}
-					<p class="is-size-5-desktop is-uppercase is-marginless has-text-weight-bold"><span id="TeamA">{{ match.team_a }}</span>: <span id="TeamAScore">{{ match.team_a_score }}</span></p>
-					<p class="is-size-5-desktop is-uppercase has-text-weight-bold"><span id="TeamB">{{ match.team_b }}</span>: <span id="TeamBScore">{{ match.team_b_score }}</span></p>
-					<p class="is-uppercase"><span id="MatchNotes">{{ match.notes }}</span></p>
-					<h2 id="Prediction" class="is-uppercase">{{ match.prediction }}</h2>
-				{% else %}
-					<p class="is-size-4-desktop">Match is not started yet.</p>
-				{% endif %}
+	<div class="notification is-primary is-radiusless is-marginless">
+		{% load tz %}
+		<p class="is-marginless is-size-7-mobile">{{ match.date|localtime|date:"d/m/Y - h:i A" }}</p>
+		<h1 class="is-marginless has-text-white is-size-4-mobile">{{ match.opponents }}</h1>
+		<p class="is-uppercase is-size-7-mobile">{{ match.series.title }}</p>
+	</div>	
+	
+	<div class="notification is-dark is-radiusless is-marginless">		
+		<div id="Board" class="columns is-mobile is-paddingless is-marginless">
+			<div class="column is-narrow">
+				<p id="TeamA" class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">{{ match.team_a }}</p>
+				<p id="TeamB" class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">{{ match.team_b }}</p>
 			</div>
-
-			{% for message in messages %}		
-				<div class="content">
-					<p class="is-size-7 is-marginless"><strong>{{ message.date|date:"d/m/Y" }} - {{ message.date|date:"h:i A" }}</strong></p>
-					<div>{{message.message|safe}}</div>
-				</div>
-				{% empty %}
-				<div class="notification">				
-					<p>There is no message for this match.</p>
-				</div>
-			{% endfor %}
-			
+			<div class="column has-text-right">
+				<p class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">  <span id="TeamAScore">{{ match.team_a_score }}</span></p>
+				<p class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">  <span id="TeamB"><span id="TeamBScore">{{ match.team_b_score }}</span></p>
+			</div>
+		</div>	
+		<p id="MatchNotes" class="is-uppercase is-size-7-mobile is-hidden">{{ match.notes }}</p>		
+	</div>
+	
+	<div id="ODDS" class="notification is-secondary is-marginless is-radiusless is-hidden">
+		<div class="columns is-mobile is-paddingless">
+			<div class="column">
+				<p id="OddsTeamA" class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">{{ match.odds_team_a_name }}</p>
+				<p id="OddsTeamB" class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">{{ match.odds_team_b_name }}</p>
+			</div>
+			<div class="column is-narrow">
+				<p class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">  <span id="OddsTA">{{ match.team_a_odds }}</span></p>
+				<p class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">  <span id="TeamB"><span id="OddsTB">{{ match.team_b_odds }}</span></p>
+			</div>
 		</div>
 	</div>	
+
+	<div class="notification is-dark is-radiusless">
+		<h4 id="Prediction" class="is-uppercase is-marginless is-size-6-mobile has-text-white is-hidden">{{ match.prediction }}</h2>
+	</div>
 
 {% endblock 'content' %}
 
@@ -39,7 +46,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 
-			setInterval(score_refresh, 10000);
+			setInterval(score_refresh, 5000);
 
 			function score_refresh(){
 
@@ -55,10 +62,52 @@
 						if (data) {
 							$('#TeamA').html(data[0]);
 							$('#TeamAScore').html(data[1]);
-							$('#TeamB').html(data[2]);
-							$('#TeamBScore').html(data[3]);
-							$('#MatchNotes').html(data[4]);
-							$('#Prediction').html(data[5]);
+							$('#OddsTA').html(data[2]);
+							$('#TeamB').html(data[3]);
+							$('#TeamBScore').html(data[4]);
+							$('#OddsTB').html(data[5]);
+
+							var notes = data[6];
+							if (notes == 'Not updated') {
+								$('#MatchNotes').addClass('is-hidden');
+								$('#Board').addClass('is-marginless');
+							} else {
+								$('#Board').removeClass('is-marginless');
+								$('#MatchNotes').removeClass('is-hidden');
+								$('#MatchNotes').html(notes);
+							}
+							
+
+							var prediction = data[7];
+							if (prediction) {
+								$('#Prediction').html(prediction);
+								$('#Prediction').removeClass('is-hidden');
+							} else {
+								
+								$('#Prediction').addClass('is-hidden');
+							}
+
+							
+							$('#OddsTeamA').html(data[8]);
+							$('#OddsTeamB').html(data[9]);
+
+							var status = data[10];
+							if (status == 'completed') {
+								$('#ODDS').hide();
+							} else {
+								$('#ODDS').show();
+							}
+
+							var OddsTA = data[2];
+							var OddsTB = data[5];
+							var OddsTeamA = data[8];
+							var OddsTeamB = data[9];
+							if (OddsTA == '0' && OddsTB == '0' && OddsTeamA == '0' && OddsTeamB == '0') {
+								$('#ODDS').addClass('is-hidden');
+							} else {
+								$('#ODDS').removeClass('is-hidden');
+							}
+
 						}
 					}
 				});
