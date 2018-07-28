@@ -9,7 +9,8 @@
 
 {% block 'content' %}	
 	<div class="notification is-primary is-radiusless is-marginless">
-		<p class="is-marginless is-size-7-mobile">{{ match.date|date:"d/m/Y" }} - {{ match.date|date:"h:i A" }}</p>
+		{% load tz %}
+		<p class="is-marginless is-size-7-mobile">{{ match.date|localtime|date:"d/m/Y - h:i A" }}</p>
 		<h1 class="is-marginless has-text-white is-size-4-mobile">{{ match.opponents }}</h1>
 		<p class="is-uppercase is-size-7-mobile"><a href="{% url 'series_detail' match.series.series_slug %}">{{ match.series.title }}</a></p>
 	</div>	
@@ -27,13 +28,8 @@
 		</div>	
 		<p id="MatchNotes" class="is-uppercase is-size-7-mobile is-hidden">{{ match.notes }}</p>		
 	</div>
-
 	
-	<div id="Prediction" class="notification is-grey is-radiusless is-marginless is-hidden">
-		<h2 class="is-uppercase is-marginless is-size-4-mobile">{{ match.prediction }}</h2>
-	</div>
-	
-	<div id="ODDS" class="notification is-secondary is-radiusless is-hidden">
+	<div id="ODDS" class="notification is-secondary is-marginless is-radiusless is-hidden">
 		<div class="columns is-mobile is-paddingless">
 			<div class="column">
 				<p id="OddsTeamA" class="is-size-5-desktop is-size-7-mobile is-uppercase is-marginless has-text-weight-bold">{{ match.odds_team_a_name }}</p>
@@ -44,7 +40,11 @@
 				<p class="is-size-5-desktop is-size-7-mobile is-uppercase has-text-weight-bold">  <span id="TeamB"><span id="OddsTB">{{ match.team_b_odds }}</span></p>
 			</div>
 		</div>
-	</div>		
+	</div>	
+
+	<div class="notification is-dark is-radiusless">
+		<h4 id="Prediction" class="is-uppercase is-marginless is-size-6-mobile has-text-white is-hidden">{{ match.prediction }}</h2>
+	</div>	
 	<hr>
 	
 	<!--h2 class="is-uppercase">Live Feed</h2>
