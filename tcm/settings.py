@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'tcm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -97,6 +97,7 @@ DATABASES = {
         'NAME': 'db234',
     }
 }
+"""
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
