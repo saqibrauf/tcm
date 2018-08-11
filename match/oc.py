@@ -128,9 +128,9 @@ def store_data():
 			
 			m.save()
 
-		print(data)
-		print(odds_data)
-		print ('Storing Data=============================================================================')
+			print(data)
+			print(odds_data)
+			print ('Storing Data=============================================================================')
 
 	else:
 
