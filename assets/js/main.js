@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Modals
-
+  
   var rootEl = document.documentElement;
   var $modals = getAll('.modal');
   var $modalButtons = getAll('.modal-button');
