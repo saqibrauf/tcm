@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Togglesssss
+  // Toggles
 
   var $burgers = getAll('.burger');
 
