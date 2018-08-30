@@ -3,12 +3,12 @@ from django.urls import path, re_path
 from . import views
 from django.contrib.sitemaps import views as sm_views
 from django.views.generic import TemplateView
-from .sitemaps import MatchSitemap, SeriesSitemap, TagSitemap
+from .sitemaps import SeriesSitemap, TagSitemap, CompleteMatches
 
 sitemaps = {
-    'match': MatchSitemap(),
     'series' : SeriesSitemap(),
     'tag' : TagSitemap(),
+    'match' : CompleteMatches(),
 }
 
 urlpatterns = [
@@ -18,7 +18,7 @@ urlpatterns = [
 	path('sitemap-<section>.xml/', sm_views.sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     
     #Website Views
-    path('', views.index, name='index' ),    
+    path('', views.index, name='index' ),
     path('upcoming-matches/', views.upcoming_matches, name='upcoming_matches'),
     path('recent-matches/', views.recent_matches, name='recent_matches'),
     path('predictions/<slug>/', views.match_detail, name='match_detail' ),
